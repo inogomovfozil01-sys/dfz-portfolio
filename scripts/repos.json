@@ -1,0 +1,2205 @@
+[
+  {
+    "createdAt": "2026-10-01T16:47:37Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 365,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 91393,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 5628,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "sister",
+    "pushedAt": "2026-10-01T16:47:50Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/sister"
+  },
+  {
+    "createdAt": "2026-09-26T15:55:20Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 33648,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 1201193,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 7175,
+        "node": {
+          "name": "CSS"
+        }
+      },
+      {
+        "size": 721,
+        "node": {
+          "name": "HTML"
+        }
+      }
+    ],
+    "name": "dfz-messenger",
+    "pushedAt": "2026-09-30T16:39:47Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/dfz-messenger"
+  },
+  {
+    "createdAt": "2026-09-23T11:42:58Z",
+    "description": "",
+    "homepageUrl": "https://classos-five.vercel.app",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 1051502,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 80567,
+        "node": {
+          "name": "CSS"
+        }
+      },
+      {
+        "size": 46140,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 2089,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 366,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "ClassOs",
+    "pushedAt": "2026-09-25T17:16:18Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/ClassOs"
+  },
+  {
+    "createdAt": "2026-09-24T09:20:58Z",
+    "description": "",
+    "homepageUrl": "https://audiophile-ruby-ten.vercel.app",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 4580,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 3840,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "Audiophile",
+    "pushedAt": "2026-09-24T10:08:48Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Audiophile"
+  },
+  {
+    "createdAt": "2026-09-22T09:31:43Z",
+    "description": "Team work",
+    "homepageUrl": "https://dokon-roan.vercel.app",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 27600,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 10908,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "Dokon",
+    "pushedAt": "2026-09-22T15:12:36Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Dokon"
+  },
+  {
+    "createdAt": "2026-09-19T09:43:49Z",
+    "description": "Oltin-kalam proyekti.",
+    "homepageUrl": "https://oltin-kalam.vercel.app",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 178087,
+        "node": {
+          "name": "HTML"
+        }
+      }
+    ],
+    "name": "oltin-kalam",
+    "pushedAt": "2026-09-22T09:19:50Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/oltin-kalam"
+  },
+  {
+    "createdAt": "2026-09-20T19:19:58Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 291071,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 105,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 2681,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "pomogayka-ai",
+    "pushedAt": "2026-09-20T19:32:17Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/pomogayka-ai"
+  },
+  {
+    "createdAt": "2026-09-20T07:00:02Z",
+    "description": "Production-ready English vocabulary learning platform with SM-2 Spaced Repetition, 10 practice modes, bilingual RU/UZ translations, and Google Gemini AI Tutor.",
+    "homepageUrl": "https://wordflow-fozilpro.vercel.app",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 1403,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 478931,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 2961,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "wordflow",
+    "pushedAt": "2026-09-20T07:40:31Z",
+    "repositoryTopics": [
+      {
+        "name": "ai"
+      },
+      {
+        "name": "english-learning"
+      },
+      {
+        "name": "gemini"
+      },
+      {
+        "name": "nextjs"
+      },
+      {
+        "name": "postgresql"
+      },
+      {
+        "name": "prisma"
+      },
+      {
+        "name": "react"
+      },
+      {
+        "name": "spaced-repetition"
+      },
+      {
+        "name": "typescript"
+      }
+    ],
+    "stargazerCount": 1,
+    "url": "https://github.com/inogomovfozil01-sys/wordflow"
+  },
+  {
+    "createdAt": "2026-09-19T19:22:46Z",
+    "description": "",
+    "homepageUrl": "https://partfoliyo-dfz.vercel.app",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 1205,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 16781,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 155589,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 4200,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "Partfoliyo-DFZ",
+    "pushedAt": "2026-09-20T04:21:12Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Partfoliyo-DFZ"
+  },
+  {
+    "createdAt": "2026-09-17T12:31:51Z",
+    "description": "Team repoditorie, for upgrade skils.",
+    "homepageUrl": "https://al-anvar.vercel.app",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 22134,
+        "node": {
+          "name": "HTML"
+        }
+      }
+    ],
+    "name": "AL-ANVAR",
+    "pushedAt": "2026-09-19T09:35:05Z",
+    "repositoryTopics": null,
+    "stargazerCount": 1,
+    "url": "https://github.com/inogomovfozil01-sys/AL-ANVAR"
+  },
+  {
+    "createdAt": "2026-09-17T13:30:35Z",
+    "description": "Special repository for GitHub Profile README",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [],
+    "name": "inogomovfozil01-sys",
+    "pushedAt": "2026-09-17T13:33:56Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/inogomovfozil01-sys"
+  },
+  {
+    "createdAt": "2026-09-15T09:59:03Z",
+    "description": "Interactive modern watch store showcase built with vanilla JavaScript (ES6+), CSS3, and HTML5",
+    "homepageUrl": "https://watches-fozilpro.vercel.app",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 56241,
+        "node": {
+          "name": "CSS"
+        }
+      },
+      {
+        "size": 49248,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 36832,
+        "node": {
+          "name": "HTML"
+        }
+      }
+    ],
+    "name": "watches",
+    "pushedAt": "2026-09-15T10:11:25Z",
+    "repositoryTopics": [
+      {
+        "name": "css3"
+      },
+      {
+        "name": "frontend"
+      },
+      {
+        "name": "html5"
+      },
+      {
+        "name": "javascript"
+      },
+      {
+        "name": "responsive-design"
+      }
+    ],
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/watches"
+  },
+  {
+    "createdAt": "2026-09-13T15:17:58Z",
+    "description": "Modern full-stack job platform built with Next.js 15, React 19, TypeScript, Tailwind CSS, Prisma, and Gemini AI",
+    "homepageUrl": "https://uzbjobs.vercel.app",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 611111,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 4478,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 2943,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "uzbjobs",
+    "pushedAt": "2026-09-14T18:17:48Z",
+    "repositoryTopics": [
+      {
+        "name": "gemini-api"
+      },
+      {
+        "name": "nextjs"
+      },
+      {
+        "name": "prisma"
+      },
+      {
+        "name": "react"
+      },
+      {
+        "name": "tailwindcss"
+      },
+      {
+        "name": "typescript"
+      },
+      {
+        "name": "vitest"
+      }
+    ],
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/uzbjobs"
+  },
+  {
+    "createdAt": "2026-09-05T09:58:26Z",
+    "description": "",
+    "homepageUrl": "https://toshkent-site.vercel.app",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 180007,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 4568,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 32516,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "toshkent-site",
+    "pushedAt": "2026-09-05T17:51:55Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/toshkent-site"
+  },
+  {
+    "createdAt": "2026-09-01T09:25:30Z",
+    "description": "",
+    "homepageUrl": "https://for-you-fozilpro.vercel.app",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 485896,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 2808,
+        "node": {
+          "name": "CSS"
+        }
+      },
+      {
+        "size": 1138,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 9807,
+        "node": {
+          "name": "PLpgSQL"
+        }
+      }
+    ],
+    "name": "ForYou",
+    "pushedAt": "2026-09-01T15:43:42Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/ForYou"
+  },
+  {
+    "createdAt": "2026-08-31T12:56:51Z",
+    "description": "",
+    "homepageUrl": "https://adelina-olive.vercel.app",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 27738,
+        "node": {
+          "name": "CSS"
+        }
+      },
+      {
+        "size": 20824,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 42724,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "mysister",
+    "pushedAt": "2026-08-31T17:01:54Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/mysister"
+  },
+  {
+    "createdAt": "2026-08-08T20:32:05Z",
+    "description": "",
+    "homepageUrl": "https://aveli-mian.vercel.app",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 820607,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 41692,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 2588,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 15540,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "Aveli-mian",
+    "pushedAt": "2026-08-25T06:55:50Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Aveli-mian"
+  },
+  {
+    "createdAt": "2026-08-08T20:15:22Z",
+    "description": "",
+    "homepageUrl": "https://aveli-api.vercel.app",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 792119,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 1449,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 4876,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "Aveli",
+    "pushedAt": "2026-08-08T20:15:38Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Aveli"
+  },
+  {
+    "createdAt": "2026-08-06T16:00:02Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 219532,
+        "node": {
+          "name": "HTML"
+        }
+      }
+    ],
+    "name": "DFZ",
+    "pushedAt": "2026-08-07T18:47:20Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/DFZ"
+  },
+  {
+    "createdAt": "2026-07-25T08:03:44Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 9122,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Word",
+    "pushedAt": "2026-07-25T08:03:56Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Word"
+  },
+  {
+    "createdAt": "2026-07-18T22:09:23Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 5064,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 7771,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 10996,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "valentika",
+    "pushedAt": "2026-07-19T10:19:49Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/valentika"
+  },
+  {
+    "createdAt": "2026-07-04T07:07:59Z",
+    "description": "",
+    "homepageUrl": "https://begiorge-web.vercel.app",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 926278,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 126920,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 3553,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 8083,
+        "node": {
+          "name": "CSS"
+        }
+      },
+      {
+        "size": 1334,
+        "node": {
+          "name": "Batchfile"
+        }
+      },
+      {
+        "size": 691,
+        "node": {
+          "name": "PLpgSQL"
+        }
+      }
+    ],
+    "name": "Begiorge",
+    "pushedAt": "2026-07-17T16:21:04Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Begiorge"
+  },
+  {
+    "createdAt": "2026-07-16T19:56:08Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 62269,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "bots-for-a-company",
+    "pushedAt": "2026-07-16T21:18:32Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/bots-for-a-company"
+  },
+  {
+    "createdAt": "2026-03-05T16:28:22Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 203952,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Eanglish-or-die",
+    "pushedAt": "2026-07-12T13:18:13Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Eanglish-or-die"
+  },
+  {
+    "createdAt": "2026-06-19T17:52:38Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 20,
+        "node": {
+          "name": "Procfile"
+        }
+      },
+      {
+        "size": 32045,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "ForgeOs---staff",
+    "pushedAt": "2026-06-20T04:43:33Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/ForgeOs---staff"
+  },
+  {
+    "createdAt": "2026-05-28T11:41:53Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 76539,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Portal-20",
+    "pushedAt": "2026-05-28T11:44:15Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Portal-20"
+  },
+  {
+    "createdAt": "2026-04-27T06:27:59Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 63631,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Portal",
+    "pushedAt": "2026-05-28T10:13:31Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Portal"
+  },
+  {
+    "createdAt": "2026-05-26T15:43:51Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 12290,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "---",
+    "pushedAt": "2026-05-28T06:53:59Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/---"
+  },
+  {
+    "createdAt": "2026-05-02T18:55:54Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 21395,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Project-for-log",
+    "pushedAt": "2026-05-23T15:09:07Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Project-for-log"
+  },
+  {
+    "createdAt": "2026-05-23T14:39:09Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 67122,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Portal-bot",
+    "pushedAt": "2026-05-23T14:47:32Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Portal-bot"
+  },
+  {
+    "createdAt": "2026-01-26T16:24:54Z",
+    "description": "Telegram automation bot built with Python for community and group workflow management",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 1248,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Bot-for-my-group",
+    "pushedAt": "2026-05-16T15:39:58Z",
+    "repositoryTopics": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "python"
+      },
+      {
+        "name": "telegram-bot"
+      }
+    ],
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Bot-for-my-group"
+  },
+  {
+    "createdAt": "2026-05-06T19:31:07Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 46146,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 15939,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 21987,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "Logs-general",
+    "pushedAt": "2026-05-14T18:52:42Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Logs-general"
+  },
+  {
+    "createdAt": "2026-05-11T07:26:05Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 120450,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 57940,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 36997,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "iqro-academy-site",
+    "pushedAt": "2026-05-11T16:41:16Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/iqro-academy-site"
+  },
+  {
+    "createdAt": "2026-05-03T11:06:25Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 30735,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 11600,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 16248,
+        "node": {
+          "name": "CSS"
+        }
+      }
+    ],
+    "name": "Logs",
+    "pushedAt": "2026-05-05T17:23:49Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Logs"
+  },
+  {
+    "createdAt": "2026-03-19T17:51:41Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 243,
+        "node": {
+          "name": "Dockerfile"
+        }
+      },
+      {
+        "size": 454,
+        "node": {
+          "name": "Makefile"
+        }
+      },
+      {
+        "size": 156976,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 704,
+        "node": {
+          "name": "Mako"
+        }
+      }
+    ],
+    "name": "Buyursin",
+    "pushedAt": "2026-04-28T21:47:52Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Buyursin"
+  },
+  {
+    "createdAt": "2026-04-25T11:56:56Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 70942,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Active-check",
+    "pushedAt": "2026-04-25T19:24:12Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Active-check"
+  },
+  {
+    "createdAt": "2026-04-25T11:20:07Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 30357,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Bot-for-active",
+    "pushedAt": "2026-04-25T11:24:31Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Bot-for-active"
+  },
+  {
+    "createdAt": "2026-04-25T11:04:25Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 27335,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Expres-chek-activ",
+    "pushedAt": "2026-04-25T11:06:58Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Expres-chek-activ"
+  },
+  {
+    "createdAt": "2026-04-25T10:31:49Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 25667,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Express-bot-chek",
+    "pushedAt": "2026-04-25T10:31:54Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Express-bot-chek"
+  },
+  {
+    "createdAt": "2026-04-25T09:31:17Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 91478,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Bot-for-check",
+    "pushedAt": "2026-04-25T10:22:57Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Bot-for-check"
+  },
+  {
+    "createdAt": "2026-04-25T09:16:38Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 25667,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Bot",
+    "pushedAt": "2026-04-25T09:16:44Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Bot"
+  },
+  {
+    "createdAt": "2026-04-21T17:08:39Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 51530,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "my-bot-to",
+    "pushedAt": "2026-04-21T20:51:29Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/my-bot-to"
+  },
+  {
+    "createdAt": "2026-03-29T14:41:13Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 25865,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Zvezd",
+    "pushedAt": "2026-04-01T12:05:56Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Zvezd"
+  },
+  {
+    "createdAt": "2026-03-28T18:12:41Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 243,
+        "node": {
+          "name": "Dockerfile"
+        }
+      },
+      {
+        "size": 454,
+        "node": {
+          "name": "Makefile"
+        }
+      },
+      {
+        "size": 173427,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 704,
+        "node": {
+          "name": "Mako"
+        }
+      }
+    ],
+    "name": "Company",
+    "pushedAt": "2026-03-29T07:41:44Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Company"
+  },
+  {
+    "createdAt": "2026-03-21T18:03:57Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 15572,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 400,
+        "node": {
+          "name": "Dockerfile"
+        }
+      }
+    ],
+    "name": "Video-for-mother",
+    "pushedAt": "2026-03-22T15:26:22Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Video-for-mother"
+  },
+  {
+    "createdAt": "2026-03-19T18:56:51Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 24655,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Buyursin-tex",
+    "pushedAt": "2026-03-20T07:40:01Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Buyursin-tex"
+  },
+  {
+    "createdAt": "2026-03-16T20:05:23Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 243,
+        "node": {
+          "name": "Dockerfile"
+        }
+      },
+      {
+        "size": 454,
+        "node": {
+          "name": "Makefile"
+        }
+      },
+      {
+        "size": 129656,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 704,
+        "node": {
+          "name": "Mako"
+        }
+      }
+    ],
+    "name": "buyursin-mega-bot",
+    "pushedAt": "2026-03-17T19:06:43Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/buyursin-mega-bot"
+  },
+  {
+    "createdAt": "2026-03-16T14:35:15Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 243,
+        "node": {
+          "name": "Dockerfile"
+        }
+      },
+      {
+        "size": 454,
+        "node": {
+          "name": "Makefile"
+        }
+      },
+      {
+        "size": 99896,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 704,
+        "node": {
+          "name": "Mako"
+        }
+      }
+    ],
+    "name": "Buyursin-bot-orginal",
+    "pushedAt": "2026-03-16T15:34:06Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Buyursin-bot-orginal"
+  },
+  {
+    "createdAt": "2026-03-14T14:46:01Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 36051,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "school",
+    "pushedAt": "2026-03-15T05:17:19Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/school"
+  },
+  {
+    "createdAt": "2026-02-15T10:28:57Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 103742,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Coi",
+    "pushedAt": "2026-03-05T16:24:50Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Coi"
+  },
+  {
+    "createdAt": "2026-02-02T08:30:48Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": true,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 50372,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 454,
+        "node": {
+          "name": "Makefile"
+        }
+      },
+      {
+        "size": 704,
+        "node": {
+          "name": "Mako"
+        }
+      },
+      {
+        "size": 232,
+        "node": {
+          "name": "Dockerfile"
+        }
+      }
+    ],
+    "name": "buyursin-bot",
+    "pushedAt": "2026-02-26T09:27:24Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/buyursin-bot"
+  },
+  {
+    "createdAt": "2026-02-14T19:44:00Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 17083,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "sallery",
+    "pushedAt": "2026-02-24T18:51:51Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/sallery"
+  },
+  {
+    "createdAt": "2026-02-24T01:05:25Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 6549,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Avtopost-Bombus",
+    "pushedAt": "2026-02-24T01:11:15Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Avtopost-Bombus"
+  },
+  {
+    "createdAt": "2026-02-23T18:24:52Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 33942,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "I",
+    "pushedAt": "2026-02-23T19:27:05Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/I"
+  },
+  {
+    "createdAt": "2026-02-14T10:17:32Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 14612,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Activ12",
+    "pushedAt": "2026-02-14T10:26:32Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Activ12"
+  },
+  {
+    "createdAt": "2026-02-14T10:21:20Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 14612,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Activ14",
+    "pushedAt": "2026-02-14T10:22:58Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Activ14"
+  },
+  {
+    "createdAt": "2026-02-12T18:53:37Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 13980000,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 64699,
+        "node": {
+          "name": "Cython"
+        }
+      },
+      {
+        "size": 356,
+        "node": {
+          "name": "Go Template"
+        }
+      },
+      {
+        "size": 25697,
+        "node": {
+          "name": "PowerShell"
+        }
+      },
+      {
+        "size": 1347,
+        "node": {
+          "name": "Batchfile"
+        }
+      }
+    ],
+    "name": "8787",
+    "pushedAt": "2026-02-13T17:06:19Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/8787"
+  },
+  {
+    "createdAt": "2026-02-12T20:09:42Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 33602,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "fonts",
+    "pushedAt": "2026-02-12T20:11:45Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/fonts"
+  },
+  {
+    "createdAt": "2026-02-12T19:33:40Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 33411,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "9898",
+    "pushedAt": "2026-02-12T19:43:45Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/9898"
+  },
+  {
+    "createdAt": "2026-02-12T08:23:29Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 28944,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "repo",
+    "pushedAt": "2026-02-12T08:40:00Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/repo"
+  },
+  {
+    "createdAt": "2026-02-12T08:15:01Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 25064,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "My-bot",
+    "pushedAt": "2026-02-12T08:15:31Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/My-bot"
+  },
+  {
+    "createdAt": "2026-02-11T18:50:15Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 7056,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "S",
+    "pushedAt": "2026-02-11T19:00:55Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/S"
+  },
+  {
+    "createdAt": "2026-02-11T18:30:14Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 5357,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "start",
+    "pushedAt": "2026-02-11T18:30:19Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/start"
+  },
+  {
+    "createdAt": "2026-02-11T17:11:31Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 6739,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "startup-general",
+    "pushedAt": "2026-02-11T17:41:13Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/startup-general"
+  },
+  {
+    "createdAt": "2026-02-11T16:44:35Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 7232,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "Startup",
+    "pushedAt": "2026-02-11T16:54:49Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Startup"
+  },
+  {
+    "createdAt": "2026-02-10T10:25:54Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [],
+    "name": "BIg-site",
+    "pushedAt": "2026-02-10T10:27:01Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/BIg-site"
+  },
+  {
+    "createdAt": "2026-02-08T11:12:40Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 15107723,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 395391,
+        "node": {
+          "name": "Cython"
+        }
+      },
+      {
+        "size": 356,
+        "node": {
+          "name": "Go Template"
+        }
+      },
+      {
+        "size": 25697,
+        "node": {
+          "name": "PowerShell"
+        }
+      },
+      {
+        "size": 1373,
+        "node": {
+          "name": "Batchfile"
+        }
+      }
+    ],
+    "name": "bot-for-me",
+    "pushedAt": "2026-02-08T14:40:56Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/bot-for-me"
+  },
+  {
+    "createdAt": "2026-02-07T19:28:52Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 232,
+        "node": {
+          "name": "Dockerfile"
+        }
+      },
+      {
+        "size": 454,
+        "node": {
+          "name": "Makefile"
+        }
+      },
+      {
+        "size": 45124,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 704,
+        "node": {
+          "name": "Mako"
+        }
+      }
+    ],
+    "name": "dz",
+    "pushedAt": "2026-02-08T09:03:13Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/dz"
+  },
+  {
+    "createdAt": "2026-02-06T19:44:34Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [],
+    "name": "IT-team-work",
+    "pushedAt": "2026-02-06T19:44:34Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/IT-team-work"
+  },
+  {
+    "createdAt": "2026-02-03T06:23:11Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [],
+    "name": "clothing-bot",
+    "pushedAt": "2026-02-03T06:23:12Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/clothing-bot"
+  },
+  {
+    "createdAt": "2026-02-02T09:11:18Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [],
+    "name": "DZ-STYLE-B",
+    "pushedAt": "2026-02-02T09:14:54Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/DZ-STYLE-B"
+  },
+  {
+    "createdAt": "2026-02-01T14:49:27Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 19681,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "DZ-STYLE-Bot",
+    "pushedAt": "2026-02-01T14:51:35Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/DZ-STYLE-Bot"
+  },
+  {
+    "createdAt": "2026-02-01T14:42:13Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [],
+    "name": "DZ-STYLE",
+    "pushedAt": "2026-02-01T14:46:22Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/DZ-STYLE"
+  },
+  {
+    "createdAt": "2026-01-22T06:25:05Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 7549,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Save_video_bro",
+    "pushedAt": "2026-01-25T11:03:35Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Save_video_bro"
+  },
+  {
+    "createdAt": "2026-01-25T06:59:49Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": true,
+    "languages": [
+      {
+        "size": 12090,
+        "node": {
+          "name": "JavaScript"
+        }
+      }
+    ],
+    "name": "IQRO-ACADEMY-BOT",
+    "pushedAt": "2026-01-25T10:06:25Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/IQRO-ACADEMY-BOT"
+  },
+  {
+    "createdAt": "2026-01-23T10:10:29Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 13786,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "IQRO-ACADEMY",
+    "pushedAt": "2026-01-24T12:12:17Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/IQRO-ACADEMY"
+  },
+  {
+    "createdAt": "2026-01-22T06:30:57Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 8561,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "News",
+    "pushedAt": "2026-01-23T08:13:19Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/News"
+  },
+  {
+    "createdAt": "2026-01-22T06:19:49Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 5283,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Quiz_bot",
+    "pushedAt": "2026-01-22T06:20:25Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Quiz_bot"
+  },
+  {
+    "createdAt": "2026-01-21T18:35:18Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 5542,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Activ",
+    "pushedAt": "2026-01-21T19:57:09Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Activ"
+  },
+  {
+    "createdAt": "2026-01-21T18:54:55Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 5084,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Avtopost",
+    "pushedAt": "2026-01-21T18:56:22Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Avtopost"
+  },
+  {
+    "createdAt": "2026-01-21T18:43:59Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 6316,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Activ1",
+    "pushedAt": "2026-01-21T18:49:02Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Activ1"
+  },
+  {
+    "createdAt": "2026-01-21T07:29:53Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 6447,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Save-video2",
+    "pushedAt": "2026-01-21T08:04:52Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Save-video2"
+  },
+  {
+    "createdAt": "2026-01-21T07:24:09Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [],
+    "name": "Save-video",
+    "pushedAt": "2026-01-21T07:28:04Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Save-video"
+  },
+  {
+    "createdAt": "2026-01-19T16:36:34Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 45202,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "Coins-bot",
+    "pushedAt": "2026-01-19T17:57:38Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Coins-bot"
+  },
+  {
+    "createdAt": "2026-01-19T16:51:33Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [],
+    "name": "Coins-bot2",
+    "pushedAt": "2026-01-19T16:53:10Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Coins-bot2"
+  },
+  {
+    "createdAt": "2026-01-19T16:49:36Z",
+    "description": "",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [],
+    "name": "Coins-bot1",
+    "pushedAt": "2026-01-19T16:49:37Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/Coins-bot1"
+  },
+  {
+    "createdAt": "2025-10-08T16:09:35Z",
+    "description": "Save Link!",
+    "homepageUrl": "",
+    "isFork": false,
+    "isPrivate": false,
+    "languages": [
+      {
+        "size": 7095,
+        "node": {
+          "name": "Python"
+        }
+      }
+    ],
+    "name": "telegram-bot",
+    "pushedAt": "2025-10-08T16:13:04Z",
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "url": "https://github.com/inogomovfozil01-sys/telegram-bot"
+  }
+]

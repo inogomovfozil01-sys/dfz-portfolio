@@ -1,0 +1,1658 @@
+[
+  {
+    "name": "dfz-messenger",
+    "url": "https://github.com/inogomovfozil01-sys/dfz-messenger",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-09-30T16:39:47Z",
+    "createdAt": "2026-09-26T15:55:20Z",
+    "topics": [],
+    "languages": {
+      "TypeScript": 1201193,
+      "JavaScript": 33648,
+      "CSS": 7175,
+      "HTML": 721
+    },
+    "packageJson": {
+      "name": "dfz-messenger",
+      "dependencies": [],
+      "devDependencies": []
+    },
+    "requirementsTxt": null,
+    "readme": "# DFZ Messenger\n\nСтатус релиза: разработка продолжается; весь production scope ещё не реализован.\nАктуальные ограничения и порядок развёртывания: [DEPLOYMENT.md](DEPLOYMENT.md).\n`npm test` запускается только с явным DATABASE_URL локальной `dfz_rebuild_qa`.\nDev-seed работает только с пустой локальной БД и не удаляет существующие данные.\n\n> DFZ Messenger — разрабатываемый realtime web-мессенджер на Next.js, Express, PostgreSQL и Socket.IO.\n\n---\n\n## ⚡ О проекте\n\n**DFZ Messenger** спроектирован как монорепозиторий и фундамент для всей будущей экосистемы (Web, PWA, Android, iOS, Desktop).\n\n### Ключевые возможности:\n- **Realtime Сообщения**: WebSocket (Socket.IO) с поддержкой состояний `sending`, `sent`, `delivered`, `read`, `failed`, идемпотентностью и оптимистичным UI.\n- **Приватные диалоги, Группы и Каналы**:\n  - 1-to-1 диалоги с проверкой блокировок.\n  - Личный чат **Избранное (Saved Messages)**.\n  - Группы с ролевой моделью (`OWNER`, `ADMIN`, `MEMBER`), гранулярными правами и инвайт-ссылками.\n  - Публичные и приватные каналы с вещанием.\n- **Медиа и файлы**:\n  - Изображения с полноэкранным Lightbox-просмотром и зумом.\n  - Видеопроигрыватель.\n  - Документы и архивы с валидацией MIME-типов и безопасными UUID-именами.\n- **Голосовые сообщения**:\n  - Запись в браузере через MediaRecorder API с таймером и отменой.\n  - Интерактивный плеер с визуализацией звуковой волны (waveform), перемоткой и скоростями (1x, 1.5x, 2x).\n- **WebRTC Аудио и Видеозвонки**:\n  - Сигнализация через WebSocket.\n  - Mute микрофона, переключение камеры, таймер звонка, плавающее окно вызова.\n- **Безопасность**:\n  - Хеширование паролей bcrypt (12 раундов).\n  - HttpOnly SameSite Secure Cookies для Access & Refresh токенов (защита от кражи токенов через XSS).\n  - Защита от brute-force с помощью rate-limiter.\n  - Управление сессиями и устройствами: завершение конкретного сеанса или всех остальных сеансов.\n  - Серверные проверки блокировок (Blocked Users) и прав доступа (IDOR/Broken Access Control).\n- **Панель Администратора и Модерация (`/admin`)**:\n  - Метрики: общее число пользователей, активные сеансы, сообщения, чаты, группы, каналы, uptime.\n  - Управление пользователями: блокировка (бан с отзывом всех активных сеансов), сброс, назначение ролей.\n  - Очередь жалоб (Reports Queue): модерация обращений.\n  - Журнал аудита действий администрации (Audit Log).\n- **PWA & Offline UX**:\n  - Поддержка установки PWA (manifest.json, offline detection, индикаторы переподключения).\n\n---\n\n## 🛠 Стек технологий\n\n- **Frontend**: Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Lucide Icons, Zustand, Socket.IO Client.\n- **Backend**: Express + TypeScript Modular Architecture, Socket.IO Gateway, Prisma ORM, bcryptjs, jsonwebtoken, Multer, Zod.\n- **База данных**: PostgreSQL 16+.\n- **Кэш / Состояние**: Redis (с отказоустойчивым In-Memory fallback для разработки без сторонних сервисов).\n- **Звонки**: WebRTC (RTCPeerConnection + STUN).\n\n---\n\n## 📁 Структура проекта\n\n```\nmessenger/\n├── apps/\n│   ├── api/                   # Backend Application\n│   │   ├── prisma/            # Схема БД, миграции, seed\n│   │   ├── src/\n│   │   │   ├── auth/          # Аутентификация, сессии, cookies, rate-limit\n│   │   │   ├── users/         # Профили, аватары, настройки приватности, блокировка\n│   │   │   ├── contacts/      # Управление контактами\n│   │   │   ├── chats/         # 1-to-1, Группы, Каналы, Избранное\n│   │   │   ├── messages/      # Сообщения, курсорная пагинация, реакции, статусы\n│   │   │   ├── media/         # Загрузка и раздача файлов, валидация MIME\n│   │   │   ├── search/        # Глобальный и локальный поиск\n│   │   │   ├── admin/         # Админ-панель, аудит-лог\n│   │   │   ├── moderation/    # Жалобы и модерация\n│   │   │   └── gateway/       # Центральный WebSocket Gateway\n│   │   └── test/              # Интеграционные тесты\n│   └── web/                   # Frontend Next.js Client\n│       ├── public/            # PWA манифест, иконки\n│       └── src/\n│           ├── app/           # App Router (/(auth), /onboarding, /admin, /)\n│           ├── components/    # UI компоненты, чат, плеер, звонки, модалки\n│           ├── stores/        # Zustand хранилища (auth, chat, call)\n│           └── lib/           # API клиент, Socket.IO, WebRTC\n├── packages/\n│   ├── types/                 # Общие TypeScript интерфейсы и DTO\n│   └── config/                # Общие константы и параметры брендинга\n├── infrastructure/\n│   ├── docker-compose.yml     # Полный Docker Compose стек\n│   ├── Dockerfile.api         # Multi-stage production образ backend\n│   └── Dockerfile.web         # Multi-stage production образ frontend\n├── .env.example               # Шаблон конфигурации\n└── README.md\n```\n\n---\n\n## 🚀 Быстрый старт (Local Development)\n\n### 1. Требования:\n- Node.js v18+ (рекомендуется v20+)\n- PostgreSQL (запущен локально или через Docker)\n\n### 2. Установка зависимостей:\n```bash\nnpm install\n```\n\n### 3. Сборка общих пакетов:\n```bash\nnpm run build --workspace=@dfz/config\nnpm run build --workspace=@dfz/types\n```\n\n### 4. Настройка базы данных и переменных окружения:\nСкопируйте `.env.example` в `.env`:\n```bash\ncp .env.example .env\n```\nУбедитесь, что параметр `DATABASE_URL` указывает на вашу базу данных PostgreSQL (например, `postgresql://postgres:password@localhost:5432/dfz_messenger?schema=public`).\n\nПримените схему базы данных:\n```bash\nnpm run db:push\n```\n\nЗапустите начальное наполнение тестовыми данными (seed):\n```bash\nnpm run db:seed\n```\n\n### 5. Запуск тестов:\n```bash\nnpm test\n```\n\n### 6. Запуск серверов разработки:\n- Запуск Backend (порт 4000):\n```bash\nnpm run dev:api\n```\n- Запуск Frontend (порт 3000):\n```bash\nnpm run dev:web\n```\n\nОткройте в браузере: `http://localhost:3000`\n\n---\n\n## 👥 Тестовые учетные записи (Seed Accounts)\n\nПосле выполнения `npm run db:seed` в базе созданы следующие пользователи:\n\n1. **Главный Администратор (Superadmin):**\n   - Username: `dfzadmin`\n   - Пароль: значение `ADMIN_PASSWORD`, заданное перед локальным seed.\n   - Доступ к панели: `http://localhost:3000/admin`\n\n2. **Инженер (User 1):**\n   - Username: `alex_dev`\n   - Пароль: `TestPass123!`\n\n3. **Дизайнер (User 2):**\n   - Username: `elena_ux`\n   - Пароль: `TestPass123!`\n\n---\n\n## 🐳 Запуск через Docker Compose\n\nДля развертывания полного окружения (PostgreSQL + Redis + MinIO + API + Web) одной командой:\n\n```bash\ndocker compose -f infrastructure/docker-compose.yml up -d\n```\n\nСервисы будут доступны по адресам:\n- **Веб-интерфейс**: `http://localhost:3000`\n- **Backend API**: `http://localhost:4000`\n- **MinIO Консоль**: `http://localhost:9001` (логин: `minioadmin`, пароль: `minioadmin`)\n\n---\n\n## 🔒 Безопасность и архитектурные решения\n\n1. **HttpOnly Cookies**: Токены аутентификации хранятся в защищенных cookies с атрибутами `HttpOnly`, `SameSite=Lax`, предотвращая кражу через XSS.\n2. **Курсорная пагинация**: Пагинация сообщений реализована через курсоры по `id` и `createdAt`, что исключает деградацию производительности `OFFSET` на миллионах строк.\n3. **Безопасная обработка файлов**: Имена загружаемых файлов заменяются на криптостойкие UUID с валидацией реального MIME-типа на стороне сервера для предотвращения Path Traversal и RCE.\n4. **Контроль доступа (RBAC)**: Все операции над группами, каналами и сообщениями валидируют членство пользователя и его роль (`OWNER`, `ADMIN`, `MEMBER`) непосредственно в сервисе перед выполнением SQL-запроса.\n",
+    "tree": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "path": ".env.example"
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "path": ".gitignore"
+      },
+      {
+        "name": ".vercelignore",
+        "type": "file",
+        "path": ".vercelignore"
+      },
+      {
+        "name": "DEPLOYMENT.md",
+        "type": "file",
+        "path": "DEPLOYMENT.md"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "apps",
+        "type": "dir",
+        "path": "apps"
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "path": "docs"
+      },
+      {
+        "name": "infrastructure",
+        "type": "dir",
+        "path": "infrastructure"
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "path": "package-lock.json"
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "path": "package.json"
+      },
+      {
+        "name": "packages",
+        "type": "dir",
+        "path": "packages"
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "path": "scripts"
+      },
+      {
+        "name": "vercel.json",
+        "type": "file",
+        "path": "vercel.json"
+      }
+    ]
+  },
+  {
+    "name": "ClassOs",
+    "url": "https://github.com/inogomovfozil01-sys/ClassOs",
+    "homepage": "https://classos-five.vercel.app",
+    "description": "",
+    "pushedAt": "2026-09-25T17:16:18Z",
+    "createdAt": "2026-09-23T11:42:58Z",
+    "topics": [],
+    "languages": {
+      "TypeScript": 1051502,
+      "CSS": 80567,
+      "JavaScript": 46140,
+      "HTML": 2089,
+      "Python": 366
+    },
+    "packageJson": {
+      "name": "classos",
+      "dependencies": [
+        "@fontsource/geist",
+        "@google/genai",
+        "@hookform/resolvers",
+        "@prisma/client",
+        "@radix-ui/react-avatar",
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-dropdown-menu",
+        "@radix-ui/react-popover",
+        "@radix-ui/react-select",
+        "@radix-ui/react-slider",
+        "@radix-ui/react-switch",
+        "@radix-ui/react-tabs",
+        "@radix-ui/react-tooltip",
+        "@tanstack/react-table",
+        "bcryptjs",
+        "class-variance-authority",
+        "clsx",
+        "date-fns",
+        "framer-motion",
+        "jose",
+        "lucide-react",
+        "next",
+        "react",
+        "react-dom",
+        "react-hook-form",
+        "sharp",
+        "socket.io",
+        "socket.io-client",
+        "sonner",
+        "tailwind-merge",
+        "tailwindcss-animate",
+        "zod"
+      ],
+      "devDependencies": [
+        "@types/bcryptjs",
+        "@types/node",
+        "@types/react",
+        "@types/react-dom",
+        "autoprefixer",
+        "cross-env",
+        "eslint",
+        "eslint-config-next",
+        "postcss",
+        "prisma",
+        "tailwindcss",
+        "typescript",
+        "vitest"
+      ]
+    },
+    "requirementsTxt": null,
+    "readme": "# ClassOS\n\nЭлектронный дневник одного класса: расписание, домашние задания, новости, файлы, чат и таблицы.\n\n## Локальный запуск\n\n1. Установите Node.js и зависимости: `npm ci`.\n2. Скопируйте `.env.example` в `.env`, заполните собственные значения.\n3. Выполните `npx prisma generate` и `npx prisma db push`.\n4. Запустите `npm run dev`, откройте `http://localhost:3000/setup` и создайте владельца.\n\nНе запускайте `db:seed` на рабочей базе: это демонстрационные аккаунты и данные.\n\nПроверки: `npm test`, `npm run lint`, `npm run build`.\n\n## Развёртывание\n\nЛокально приложение использует SQLite, диск и Socket.IO через `server.js`.\n\nНа Vercel сборка создаёт PostgreSQL-схему из основной Prisma-схемы. Перед первым запуском примените её к облачной базе. Файлы сохраняются в базе и выдаются после авторизации; размер загрузки ограничен 4 МБ. Чат проверяет сообщения каждые 4 секунды, индикаторы присутствия и набора текста требуют локального Socket.IO-сервера.\n\nВ разделе «Забыл пароль» ученик отправляет заявку классному руководителю. Только роль TEACHER может видеть заявки класса и передавать временный пароль, уже установленный через eMaktab или школьного администратора. Интеграции для изменения пароля в eMaktab нет. Передача шифруется AES-256-GCM с ключом, производным от AUTH_SECRET, доступна только получателю один раз в течение 24 часов и удаляется при получении или отмене. Просроченные передачи удаляет ежедневный Cron; API запрещает получение сразу после истечения срока. Смена AUTH_SECRET делает незавершённые передачи нечитаемыми. Значения секретов не попадают в уведомления, аудит или сводку.\n\nЛичная заметка хранится только в браузере ученика: AES-GCM, ключ из отдельного кода через PBKDF2, 250000 итераций, привязка к пользователю. Сервер не получает её текст или код. Заметка не синхронизируется и не восстанавливается после потери кода или очистки браузера. Старые пятидневные проверки доступа отключены.\n\nВ Production Environment Variables задайте `DATABASE_URL`, случайные `AUTH_SECRET` и `CRON_SECRET`, `GEMINI_API_KEY`, `NEXT_PUBLIC_SERVERLESS=1`, `NEXT_PUBLIC_MAX_UPLOAD_MB=4`. Для базы вне Railway используйте публичный TCP-адрес. Не переносите локальные сессии или демонстрационные аккаунты в рабочую базу.\n\n`.env`, локальные базы, пользовательские загрузки и QA-артефакты не входят в репозиторий. Секреты задаются в настройках выбранного хостинга.\n",
+    "tree": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "path": ".env.example"
+      },
+      {
+        "name": ".eslintrc.json",
+        "type": "file",
+        "path": ".eslintrc.json"
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "path": ".gitignore"
+      },
+      {
+        "name": ".vercelignore",
+        "type": "file",
+        "path": ".vercelignore"
+      },
+      {
+        "name": "AGENTS.md",
+        "type": "file",
+        "path": "AGENTS.md"
+      },
+      {
+        "name": "CLAUDE.md",
+        "type": "file",
+        "path": "CLAUDE.md"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "app",
+        "type": "dir",
+        "path": "app"
+      },
+      {
+        "name": "artifacts",
+        "type": "dir",
+        "path": "artifacts"
+      },
+      {
+        "name": "components",
+        "type": "dir",
+        "path": "components"
+      },
+      {
+        "name": "lib",
+        "type": "dir",
+        "path": "lib"
+      },
+      {
+        "name": "next.config.mjs",
+        "type": "file",
+        "path": "next.config.mjs"
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "path": "package-lock.json"
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "path": "package.json"
+      },
+      {
+        "name": "postcss.config.js",
+        "type": "file",
+        "path": "postcss.config.js"
+      },
+      {
+        "name": "prisma",
+        "type": "dir",
+        "path": "prisma"
+      },
+      {
+        "name": "public",
+        "type": "dir",
+        "path": "public"
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "path": "scripts"
+      },
+      {
+        "name": "server.js",
+        "type": "file",
+        "path": "server.js"
+      },
+      {
+        "name": "storage",
+        "type": "dir",
+        "path": "storage"
+      },
+      {
+        "name": "tailwind.config.ts",
+        "type": "file",
+        "path": "tailwind.config.ts"
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "path": "tests"
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "path": "tsconfig.json"
+      },
+      {
+        "name": "vercel.json",
+        "type": "file",
+        "path": "vercel.json"
+      },
+      {
+        "name": "vitest.config.ts",
+        "type": "file",
+        "path": "vitest.config.ts"
+      }
+    ]
+  },
+  {
+    "name": "Audiophile",
+    "url": "https://github.com/inogomovfozil01-sys/Audiophile",
+    "homepage": "https://audiophile-ruby-ten.vercel.app",
+    "description": "",
+    "pushedAt": "2026-09-24T10:08:48Z",
+    "createdAt": "2026-09-24T09:20:58Z",
+    "topics": [],
+    "languages": {
+      "HTML": 4580,
+      "CSS": 3840
+    },
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": null,
+    "tree": [
+      {
+        "name": ".vscode",
+        "type": "dir",
+        "path": ".vscode"
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "path": "index.html"
+      },
+      {
+        "name": "rjhpbyrf.svg",
+        "type": "file",
+        "path": "rjhpbyrf.svg"
+      },
+      {
+        "name": "style.css",
+        "type": "file",
+        "path": "style.css"
+      }
+    ]
+  },
+  {
+    "name": "Dokon",
+    "url": "https://github.com/inogomovfozil01-sys/Dokon",
+    "homepage": "https://dokon-roan.vercel.app",
+    "description": "Team work",
+    "pushedAt": "2026-09-22T15:12:36Z",
+    "createdAt": "2026-09-22T09:31:43Z",
+    "topics": [],
+    "languages": {
+      "HTML": 27600,
+      "CSS": 10908
+    },
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": null,
+    "tree": [
+      {
+        "name": "about.html",
+        "type": "file",
+        "path": "about.html"
+      },
+      {
+        "name": "cotalog.html",
+        "type": "file",
+        "path": "cotalog.html"
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "path": "index.html"
+      },
+      {
+        "name": "korzinka.html",
+        "type": "file",
+        "path": "korzinka.html"
+      },
+      {
+        "name": "style.css",
+        "type": "file",
+        "path": "style.css"
+      }
+    ]
+  },
+  {
+    "name": "oltin-kalam",
+    "url": "https://github.com/inogomovfozil01-sys/oltin-kalam",
+    "homepage": "https://oltin-kalam.vercel.app",
+    "description": "Oltin-kalam proyekti.",
+    "pushedAt": "2026-09-22T09:19:50Z",
+    "createdAt": "2026-09-19T09:43:49Z",
+    "topics": [],
+    "languages": {
+      "HTML": 178087
+    },
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": null,
+    "tree": [
+      {
+        "name": "appeal.html",
+        "type": "file",
+        "path": "appeal.html"
+      },
+      {
+        "name": "articles.html",
+        "type": "file",
+        "path": "articles.html"
+      },
+      {
+        "name": "authors.html",
+        "type": "file",
+        "path": "authors.html"
+      },
+      {
+        "name": "catalog.html",
+        "type": "file",
+        "path": "catalog.html"
+      },
+      {
+        "name": "contacts.html",
+        "type": "file",
+        "path": "contacts.html"
+      },
+      {
+        "name": "images",
+        "type": "dir",
+        "path": "images"
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "path": "index.html"
+      },
+      {
+        "name": "logo.png",
+        "type": "file",
+        "path": "logo.png"
+      },
+      {
+        "name": "publishers.html",
+        "type": "file",
+        "path": "publishers.html"
+      }
+    ]
+  },
+  {
+    "name": "pomogayka-ai",
+    "url": "https://github.com/inogomovfozil01-sys/pomogayka-ai",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-09-20T19:32:17Z",
+    "createdAt": "2026-09-20T19:19:58Z",
+    "topics": [],
+    "languages": {
+      "TypeScript": 291071,
+      "CSS": 2681,
+      "JavaScript": 105
+    },
+    "packageJson": {
+      "name": "pomogayka",
+      "dependencies": [
+        "@prisma/client",
+        "clsx",
+        "dotenv",
+        "framer-motion",
+        "grammy",
+        "lucide-react",
+        "next",
+        "react",
+        "react-dom",
+        "tailwind-merge",
+        "zod"
+      ],
+      "devDependencies": [
+        "@types/node",
+        "@types/react",
+        "@types/react-dom",
+        "autoprefixer",
+        "postcss",
+        "prisma",
+        "tailwindcss",
+        "tsx",
+        "typescript",
+        "vitest"
+      ]
+    },
+    "requirementsTxt": null,
+    "readme": "# Помогайка DFZ — AI-экосистема помощи с домашними заданиями\n\nСовременная production-ready образовательная платформа и интеллектуальный Telegram-бот для сообщества **«Помогайка DFZ»**. Бот работает в существующих темах супергруппы по классам (1–11 классы), мгновенно распознает фотографии учебников и тетрадей с помощью **Google Gemini Vision**, объясняет решения понятным школьнику соответствующего класса языком и поддерживает непрерывный диалог.\n\n---\n\n## 🌟 Ключевые возможности\n\n1. **Telegram-бот с поддержкой тем (Topics):**\n   - Автоматическое определение класса ученика (`USER_GRADE = 1..11`) по `message_thread_id`.\n   - Объяснение строго по школьной программе: в 4 классе — по действиям без X; в старших классах — с формулами и доказательствами.\n   - Поддержка альбомов нескольких фотографий (`media_group_id`) без дублирования ответов.\n   - Связывание контекста: если ученик скинул фото, а затем написал *«помогите 8,9»* или *«а 10?»*, бот автоматически связывает запрос с последней фотографией в теме.\n   - Детерминированный Intent Router: отсекает обычные разговоры участников (*«привет»*, *«кто в школу?»*, *«спс»*) без лишнего расхода токенов Gemini.\n   - Режим **Human-First**: бот может подождать 1–5 минут помощи от участников, и отвечает только если никто не помог.\n2. **AI Vision & Gemini Engine:**\n   - Модель `gemini-3.6-flash` (с автоматическим fallback и повторами при пиковых нагрузках).\n   - Распознавание печатного и рукописного текста, дробей, формул, геометрических чертежей и досок.\n   - **OCR Safety (No Hallucinations):** если снимок размыт или обрезан, бот честно сообщает об этом, не выдумывая числа.\n   - Защита от Prompt Injection: текст на фото и в задачах изолирован как пользовательские данные.\n   - 3 режима: 📖 Пошаговое решение, ⚡ Только ответ, 🧠 Научи меня (сократовские подсказки).\n   - Проверка решений: *«я получил 427, правильно?»* → точечный анализ каждого шага.\n3. **Современная веб-платформа (Next.js 15):**\n   - Интерактивная главная страница с живой демонстрацией работы AI.\n   - **/ai** — AI Workspace и Telegram Mini App с поддержкой drag & drop, вставки из буфера обмена (Ctrl+V) и прямого захвата с камеры мобильного телефона (`capture=\"environment\"`).\n   - **/dashboard** — поддерживающий кабинет ученика (количество решенных задач, предметы, не превращаясь в стрессовую систему оценок).\n   - **/history** — история обращений и решений с поиском и фильтрами.\n   - **/community** — страница команды DFZ (`@realDFZ`, `@LoveIcelattee`, `@pomogaykaTeamBot`).\n   - **/rules** & **/faq** — правила сообщества и подробные ответы на вопросы.\n4. **Модерация и безопасность:**\n   - Команды участников: `/rules`, `/mywarns`, `/report`, `/ask`.\n   - Команды администрации: `/warn`, `/mute`, `/unmute`, `/ban`, `/unban`, `/clearwarns`.\n   - Система 3-х предупреждений: 3 активных варна = автоматический бан в группе.\n   - Панель управления **/admin** только для проверенных Telegram User ID (создатель `6564196947` и доверенные админы).\n   - Управление сопоставлением топиков с классами и AI-режимами прямо из интерфейса.\n   - Редактирование правил сообщества в базе данных.\n\n---\n\n## 🛠️ Стек технологий\n\n- **Frontend:** Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, Lucide Icons, Framer Motion, PWA.\n- **Backend:** Next.js Server Actions / API Routes, grammY (Telegram Bot API).\n- **База данных:** PostgreSQL (Neon / Supabase), Prisma ORM v6.\n- **AI:** Google Gemini API (Multimodal Vision, Structured Outputs).\n- **Безопасность:** HMAC-SHA256 валидация Telegram Login Widget и Mini App initData, экранирование Telegram HTML, Zod, CSRF protection.\n\n---\n\n## 🚀 Установка и запуск\n\n### 1. Клонирование и установка зависимостей\n```bash\ngit clone https://github.com/your-repo/pomogayka.git\ncd pomogayka\nnpm install\n```\n\n### 2. Настройка переменных окружения\nСоздайте файл `.env` на основе `.env.example`:\n```env\n# База данных PostgreSQL (Neon / Supabase)\nDATABASE_URL=\"postgresql://user:password@host/neondb?sslmode=require\"\n\n# Telegram Bot API\nTELEGRAM_BOT_TOKEN=\"8990437531:AAHGXPcJmClVVSxgd5VBHXUEbKmcHcUyXiY\"\nTELEGRAM_CHAT_ID=\"-1002489987868\"\nTELEGRAM_WEBHOOK_SECRET=\"your-webhook-secret-token\"\nNEXT_PUBLIC_TELEGRAM_BOT_USERNAME=\"pomogaykaTeamBot\"\n\n# Google Gemini API\nGEMINI_API_KEY=\"AIzaSy...\"\nGEMINI_MODEL=\"gemini-3.6-flash\"\n\n# Домен приложения\nNEXT_PUBLIC_APP_URL=\"http://localhost:3000\"\n\n# Telegram ID администраторов (через запятую)\nADMIN_TELEGRAM_IDS=\"6564196947,8806627868\"\n\n# Политика хранения данных (дни: 7, 30 или 90)\nRETENTION_DAYS=\"30\"\n```\n\n### 3. Синхронизация БД и сидинг данных\n```bash\nnpx prisma db push\nnpm run db:seed\n```\n\n### 4. Запуск веб-сервера разработки\n```bash\nnpm run dev\n```\nВеб-приложение доступно по адресу [http://localhost:3000](http://localhost:3000).\n\n### 5. Запуск Telegram-бота (Long-Polling для разработки)\n```bash\nnpm run bot\n```\n\n---\n\n## 🤖 Настройка Telegram BotFather & Webhook\n\n1. **Создание бота:**\n   - Откройте [@BotFather](https://t.me/BotFather) и создайте бота или используйте существующий токен.\n   - Включите поддержку групп: `/setjoingroups` → `Enable`.\n   - Включите приватность или разрешение чтения сообщений: `/setprivacy` → `Disable` (чтобы бот видел учебные фото в супергруппе без явного тега).\n   - Привяжите Web App: `/newapp` или укажите URL `/ai` как Main Web App.\n\n2. **Настройка Webhook на production (Vercel / Always-On):**\n   ```bash\n   curl -F \"url=https://your-domain.com/api/telegram/webhook\" \\\n        -F \"secret_token=your-webhook-secret-token\" \\\n        https://api.telegram.org/bot<TOKEN>/setWebhook\n   ```\n\n---\n\n## 🧪 Запуск тестов\n\n```bash\n# Запуск полного набора unit и integration тестов\nnpm test\n\n# Проверка типов TypeScript\nnpm run typecheck\n\n# Сборка production билда\nnpm run build\n```\n\n---\n\n## 👥 Команда сообщества\n\n- **Руководитель / Создатель:** 𝙟𝙪𝙨𝙩 𝙥𝙧𝙤𝙜𝙧𝙖𝙢𝙢𝙞𝙣𝙜 ([@realDFZ](https://t.me/realDFZ), ID: `6564196947`)\n- **Администратор:** ::A`☕+⁰¹⁷ ([@LoveIcelattee](https://t.me/LoveIcelattee), ID: `8806627868`)\n- **Официальный чат:** [@pomogaykaTeam](https://t.me/pomogaykaTeam)\n- **Официальный бот:** [@pomogaykaTeamBot](https://t.me/pomogaykaTeamBot)\n\n© {new Date().getFullYear()} Помогайка DFZ. Все права защищены.\n",
+    "tree": [
+      {
+        "name": ".env",
+        "type": "file",
+        "path": ".env"
+      },
+      {
+        "name": ".env.example",
+        "type": "file",
+        "path": ".env.example"
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "path": ".gitignore"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "next.config.ts",
+        "type": "file",
+        "path": "next.config.ts"
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "path": "package-lock.json"
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "path": "package.json"
+      },
+      {
+        "name": "postcss.config.mjs",
+        "type": "file",
+        "path": "postcss.config.mjs"
+      },
+      {
+        "name": "prisma",
+        "type": "dir",
+        "path": "prisma"
+      },
+      {
+        "name": "public",
+        "type": "dir",
+        "path": "public"
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "path": "scripts"
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "path": "src"
+      },
+      {
+        "name": "tailwind.config.ts",
+        "type": "file",
+        "path": "tailwind.config.ts"
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "path": "tests"
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "path": "tsconfig.json"
+      },
+      {
+        "name": "vitest.config.ts",
+        "type": "file",
+        "path": "vitest.config.ts"
+      }
+    ]
+  },
+  {
+    "name": "wordflow",
+    "url": "https://github.com/inogomovfozil01-sys/wordflow",
+    "homepage": "https://wordflow-fozilpro.vercel.app",
+    "description": "Production-ready English vocabulary learning platform with SM-2 Spaced Repetition, 10 practice modes, bilingual RU/UZ translations, and Google Gemini AI Tutor.",
+    "pushedAt": "2026-09-20T07:40:31Z",
+    "createdAt": "2026-09-20T07:00:02Z",
+    "topics": [
+      "ai",
+      "english-learning",
+      "gemini",
+      "nextjs",
+      "postgresql",
+      "prisma",
+      "react",
+      "spaced-repetition",
+      "typescript"
+    ],
+    "languages": {
+      "TypeScript": 478931,
+      "CSS": 2961,
+      "JavaScript": 1403
+    },
+    "packageJson": {
+      "name": "excited-bardeen",
+      "dependencies": [
+        "@google/genai",
+        "@prisma/adapter-pg",
+        "@prisma/client",
+        "prisma",
+        "@types/pg",
+        "bcryptjs",
+        "canvas-confetti",
+        "clsx",
+        "jose",
+        "lucide-react",
+        "next",
+        "pg",
+        "react",
+        "react-dom",
+        "tailwind-merge",
+        "zod"
+      ],
+      "devDependencies": [
+        "@electric-sql/pglite",
+        "@electric-sql/pglite-socket",
+        "@tailwindcss/postcss",
+        "@types/bcryptjs",
+        "@types/canvas-confetti",
+        "@types/node",
+        "@types/react",
+        "@types/react-dom",
+        "eslint",
+        "eslint-config-next",
+        "prisma",
+        "tailwindcss",
+        "tsx",
+        "typescript"
+      ]
+    },
+    "requirementsTxt": null,
+    "readme": "# 🌊 WordFlow — Production-Ready English Vocabulary Platform\n\nWordFlow is a full-stack, database-backed English vocabulary learning platform built with **Next.js 16 (App Router)**, **PostgreSQL**, **Prisma ORM**, and **Google Gemini 3.8 Flash AI**. It combines cognitive science (SuperMemo SM-2 spaced repetition), multi-modal practice, dual-language translations (Russian & Uzbek), and adaptive AI tutoring to take learners from A1 to C2 mastery.\n\n---\n\n## 🚀 Key Features\n\n### 🧠 1. SM-2 Spaced Repetition System (SRS)\n- Pure mathematical implementation of the SuperMemo SM-2 spaced repetition algorithm.\n- Tracks `easeFactor` (minimum boundary 1.3), intervals (1 day, 6 days, exponential scaling), repetitions, and memory lapses.\n- Automatic transition to **MASTERED** status once intervals exceed 21 days with successful recall.\n- Real-time overdue scheduling and review queues at `/review`.\n\n### 🎯 2. Interactive Learning Engine (`/learn`)\n- Multi-step vocabulary progression:\n  1. **Interactive Flashcard**: Word, IPA, definition, audio pronunciation, Russian & Uzbek translations.\n  2. **Multiple Choice Recognition**: Contextual definition mapping with randomized distractors.\n  3. **Active Recall Typing**: Spelling and active vocabulary production.\n  4. **Fill-in-the-Blank Cloze**: Sentence completion testing contextual usage.\n- Real-time progress bar, immediate feedback, audio cues, and confetti celebrations on session completion.\n\n### 🎮 3. 10 Comprehensive Practice Modes (`/practice`)\n1. **Speed Review**: 10-second rapid-fire recall challenge.\n2. **Synonym Match**: Test semantic nuance and related vocabulary.\n3. **Antonym Match**: Opposite-word recognition.\n4. **Listening & Pronunciation**: Speech synthesis audio with transcription verification.\n5. **Collocation Builder**: Master natural word pairings and prepositional combinations.\n6. **Definition Match**: Match complex CEFR definitions to headwords.\n7. **Word Scramble**: Anagram puzzle testing exact English spelling.\n8. **Dual Translation (RU/UZ)**: English to Russian & Uzbek bidirectional testing.\n9. **Reverse Translation**: Target native language to English recall.\n10. **Sentence Builder**: Arrange scrambled words into grammatical sentences.\n\n### 🤖 4. Google Gemini 3.8 Flash AI Integration\n- **AI English Tutor (`/ai-tutor`)**: Conversational tutor that automatically calibrates explanations to the user's current CEFR level (A1–C2).\n- **AI Word Explainer (Modal & Dictionary)**: On-demand mnemonics, CEFR-tailored sentences, false friend warnings, and instant mini-quizzes.\n- Powered by official `@google/genai` SDK with graceful educational fallbacks.\n\n### 🏆 5. Gamification & Analytics\n- Server-authoritative XP and level curve: `XP = 50 * (Level - 1)^2`.\n- Multi-day streak tracker with backward date traversal.\n- Global Community Leaderboard (`/leaderboard`) with top-3 podiums and live rankings.\n- Retention analytics (`/stats`): CEFR distribution breakdown, memory strength, and 30-day activity logs.\n- Unlocked achievement milestones with badges.\n\n### 🛡️ 6. Security & Administration\n- Edge-ready JWT sessions with HTTP-only cookies (`jose`) and bcrypt password hashing.\n- Server-side route middleware protection (`/dashboard`, `/learn`, `/review`, `/practice`, `/settings`, `/stats`, `/ai-tutor`, `/admin`).\n- Role-protected Admin Control Center (`/admin`):\n  - Live PostgreSQL database metrics.\n  - Full Word CRUD dictionary editor (create, inspect, delete).\n  - Admin audit logging for traceability.\n\n---\n\n## 🛠️ Tech Stack\n\n- **Framework**: [Next.js 16.3.5](https://nextjs.org/) (App Router, Turbopack, React 19, TypeScript strict mode)\n- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)\n- **Database & ORM**: PostgreSQL + [Prisma 6.4.1](https://www.prisma.io/)\n- **AI Engine**: [Google Gemini 3.8 Flash](https://ai.google.dev/) via `@google/genai`\n- **Authentication**: JWT (`jose`) + `bcryptjs` + HTTP-only cookies\n- **Validation**: [Zod v4](https://zod.dev/)\n- **Speech**: Web Speech API native synthesizer\n- **Icons**: [Lucide React](https://lucide.dev/)\n\n---\n\n## 📦 Getting Started\n\n### 1. Prerequisites\n- Node.js 20+ (Node 24 recommended)\n- PostgreSQL database (Local or Cloud like [Neon](https://neon.tech), Supabase, or AWS RDS)\n\n### 2. Clone & Install Dependencies\n```bash\ngit clone <repository-url>\ncd excited-bardeen\nnpm install\n```\n\n### 3. Environment Configuration\nCreate a `.env` file based on `.env.example`:\n```bash\ncp .env.example .env\n```\n\nSet the following variables:\n```env\nDATABASE_URL=\"postgresql://user:password@host/database?sslmode=require\"\nDIRECT_URL=\"postgresql://user:password@host/database?sslmode=require\"\nAUTH_SECRET=\"your-32-character-random-secret-key\"\nNEXT_PUBLIC_APP_URL=\"http://localhost:3000\"\nGEMINI_API_KEY=\"your-gemini-api-key\"\n```\n\n### 4. Database Setup & Seed\nPush the Prisma schema to your PostgreSQL database and populate initial vocabulary:\n```bash\nnpx prisma db push\nnpx tsx prisma/seed.ts\n```\n\n### 5. Run Automated Tests\n```bash\nnpm test\n```\nAll 27 automated unit tests for SM-2, XP curves, streaks, and Zod validation will run and pass.\n\n### 6. Start Development Server\n```bash\nnpm run dev\n```\nOpen [http://localhost:3000](http://localhost:3000) in your browser.\n\n---\n\n## 🔑 Default Accounts (Seeded)\n\n| Account | Email | Password | Role |\n| :--- | :--- | :--- | :--- |\n| **Admin** | `admin@wordflow.app` | `Admin@WordFlow2026!` | `ADMIN` (Full dictionary CRUD & panel) |\n| **Demo Learner** | `demo@wordflow.app` | `Demo@WordFlow2026!` | `USER` (B1 Intermediate vocabulary) |\n\n---\n\n## 🚢 Production Deployment to Vercel\n\n1. Push code to your Git repository (GitHub / GitLab / Bitbucket).\n2. Connect the repository in [Vercel](https://vercel.com).\n3. Under **Environment Variables**, add:\n   - `DATABASE_URL` (Pooled PostgreSQL connection string)\n   - `DIRECT_URL` (Direct PostgreSQL connection string for Prisma)\n   - `AUTH_SECRET` (Secure 32+ character string)\n   - `NEXT_PUBLIC_APP_URL` (Production URL, e.g. `https://wordflow.app`)\n   - `GEMINI_API_KEY` (Your Google AI Studio API key)\n4. Build command is automatically detected: `next build`.\n5. Deploy!\n\n---\n\n## 📄 License\nMIT © 2026 WordFlow Team. All rights reserved.\n",
+    "tree": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "path": ".env.example"
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "path": ".gitignore"
+      },
+      {
+        "name": "AGENTS.md",
+        "type": "file",
+        "path": "AGENTS.md"
+      },
+      {
+        "name": "CLAUDE.md",
+        "type": "file",
+        "path": "CLAUDE.md"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "eslint.config.mjs",
+        "type": "file",
+        "path": "eslint.config.mjs"
+      },
+      {
+        "name": "next.config.ts",
+        "type": "file",
+        "path": "next.config.ts"
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "path": "package-lock.json"
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "path": "package.json"
+      },
+      {
+        "name": "postcss.config.mjs",
+        "type": "file",
+        "path": "postcss.config.mjs"
+      },
+      {
+        "name": "prisma",
+        "type": "dir",
+        "path": "prisma"
+      },
+      {
+        "name": "public",
+        "type": "dir",
+        "path": "public"
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "path": "scripts"
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "path": "src"
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "path": "tsconfig.json"
+      },
+      {
+        "name": "vercel.json",
+        "type": "file",
+        "path": "vercel.json"
+      }
+    ]
+  },
+  {
+    "name": "AL-ANVAR",
+    "url": "https://github.com/inogomovfozil01-sys/AL-ANVAR",
+    "homepage": "https://al-anvar.vercel.app",
+    "description": "Team repoditorie, for upgrade skils.",
+    "pushedAt": "2026-09-19T09:35:05Z",
+    "createdAt": "2026-09-17T12:31:51Z",
+    "topics": [],
+    "languages": {
+      "HTML": 22134
+    },
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": null,
+    "tree": [
+      {
+        "name": "index.html",
+        "type": "file",
+        "path": "index.html"
+      },
+      {
+        "name": "umra-hadj.png",
+        "type": "file",
+        "path": "umra-hadj.png"
+      }
+    ]
+  },
+  {
+    "name": "inogomovfozil01-sys",
+    "url": "https://github.com/inogomovfozil01-sys/inogomovfozil01-sys",
+    "homepage": "",
+    "description": "Special repository for GitHub Profile README",
+    "pushedAt": "2026-09-17T13:33:56Z",
+    "createdAt": "2026-09-17T13:30:35Z",
+    "topics": [],
+    "languages": {},
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": "<div align=\"center\">\n\n  <!-- Header Dynamic Banner -->\n  <img src=\"https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=1,11,21&height=220&section=header&text=Hi%2C%20I'm%20Fozilbek%20👋&fontSize=42&fontAlignY=36&animation=fadeIn\" width=\"100%\" alt=\"Header\" />\n\n  <!-- Animated Typing Subtitle -->\n  <a href=\"https://github.com/inogomovfozil01-sys\">\n    <img src=\"https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&width=580&lines=Frontend+Developer+%26+AI+Specialist;HTML5+%7C+CSS3+%7C+JavaScript+%7C+React;Next.js+%7C+TypeScript+%7C+Tailwind+CSS;Generative+AI+%7C+Gemini+API+%7C+Prompt+Engineering;Git+%26+GitHub+%7C+Clean+Code+%7C+Modern+UI\" alt=\"Typing SVG\" />\n  </a>\n\n  <br />\n\n  <!-- Quick Badges / Contacts -->\n  <p align=\"center\">\n    <a href=\"mailto:inogomovfozil01@gmail.com\">\n      <img src=\"https://img.shields.io/badge/Email-inogomovfozil01%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white\" alt=\"Email\" />\n    </a>\n    <a href=\"https://t.me/inogomovfozil\" target=\"_blank\">\n      <img src=\"https://img.shields.io/badge/Telegram-Contact%20Me-229ED9?style=for-the-badge&logo=telegram&logoColor=white\" alt=\"Telegram\" />\n    </a>\n    <a href=\"https://github.com/inogomovfozil01-sys\">\n      <img src=\"https://img.shields.io/badge/GitHub-inogomovfozil01--sys-181717?style=for-the-badge&logo=github&logoColor=white\" alt=\"GitHub\" />\n    </a>\n  </p>\n\n</div>\n\n---\n\n### 👨‍💻 About Me / Обо мне\n\nПривет! Я **Frontend-разработчик** и специалист по внедрению **Искусственного Интеллекта (AI)**. Создаю современные, адаптивные и интерактивные веб-интерфейсы, обогащая их мощными возможностями нейросетей и автоматизации.\n\n- 🎨 **Frontend**: Уверенно владею **HTML5**, **CSS3**, **JavaScript (ES6+)**, а также современным стеком (**React**, **Next.js**, **TypeScript**, **Tailwind CSS**).\n- 🤖 **AI & Нейросети**: Разработка умных решений, интеграция LLM API (**Google Gemini API**, генеративные модели), Prompt Engineering и создание интеллектуальных чат-ботов.\n- 🔧 **Инструменты & VCS**: Работаю с **Git** и **GitHub**, следую принципам чистого кода и компонентной архитектуры.\n- 📍 Локация: **Ташкент, Узбекистан**.\n- 🚀 Стремлюсь к созданию эстетичных, быстрых веб-приложений нового поколения на стыке Frontend и ИИ.\n\n---\n\n### 🛠️ Стек технологий и навыки\n\n<div align=\"center\">\n\n#### 🎨 Frontend Development\n<p align=\"center\">\n  <img src=\"https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,tailwind,redux\" alt=\"Frontend Technologies\" />\n</p>\n\n#### 🧠 AI & Intelligent Automation\n<p align=\"center\">\n  <img src=\"https://img.shields.io/badge/Google_Gemini_AI-8E75C4?style=for-the-badge&logo=googlegemini&logoColor=white\" alt=\"Gemini AI\" />\n  <img src=\"https://img.shields.io/badge/Generative_AI-FF6F00?style=for-the-badge&logo=openai&logoColor=white\" alt=\"Generative AI\" />\n  <img src=\"https://img.shields.io/badge/Prompt_Engineering-00897B?style=for-the-badge&logo=codementor&logoColor=white\" alt=\"Prompt Engineering\" />\n  <img src=\"https://img.shields.io/badge/Python_Automation-3776AB?style=for-the-badge&logo=python&logoColor=white\" alt=\"Python\" />\n</p>\n\n#### ⚙️ Tools & Workflow\n<p align=\"center\">\n  <img src=\"https://skillicons.dev/icons?i=git,github,vscode,figma,postman,vitest\" alt=\"Tools & Workflow\" />\n</p>\n\n</div>\n\n---\n\n### 🚀 Избранные проекты (Featured Projects)\n\n| Проект | Стек | Описание |\n| :--- | :--- | :--- |\n| 🤖 **[uzbjobs](https://github.com/inogomovfozil01-sys/uzbjobs)** | Next.js 15, React 19, Gemini AI, TypeScript, Tailwind | Платформа поиска работы с интеграцией **Искусственного Интеллекта (Gemini API)**, современным UI и чистой архитектурой. |\n| ⏱️ **[watches](https://github.com/inogomovfozil01-sys/watches)** | JavaScript, CSS3, HTML5 | Интерактивная витрина товаров с адаптивной версткой, плавными анимациями и чистым JS. |\n| ⚡ **[Bot-for-my-group](https://github.com/inogomovfozil01-sys/Bot-for-my-group)** | Python | Telegram-бот для автоматизации рабочих процессов, модерации сообществ и оповещений. |\n\n---\n\n### 📊 Активность и статистика GitHub\n\n<div align=\"center\">\n  <table border=\"0\">\n    <tr>\n      <td>\n        <img src=\"https://github-readme-stats.vercel.app/api?username=inogomovfozil01-sys&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=38bdf8&icon_color=38bdf8\" alt=\"GitHub Stats\" height=\"165\" />\n      </td>\n      <td>\n        <img src=\"https://github-readme-stats.vercel.app/api/top-langs/?username=inogomovfozil01-sys&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=38bdf8\" alt=\"Top Languages\" height=\"165\" />\n      </td>\n    </tr>\n  </table>\n\n  <br />\n\n  <img src=\"https://github-readme-streak-stats.herokuapp.com/?user=inogomovfozil01-sys&theme=tokyonight&hide_border=true&background=0d1117&stroke=38bdf8&ring=38bdf8&fire=38bdf8\" alt=\"GitHub Streak\" />\n\n  <br /><br />\n\n  <img src=\"https://github-readme-activity-graph.vercel.app/graph?username=inogomovfozil01-sys&theme=tokyo-night&hide_border=true&bg_color=0d1117&color=38bdf8&line=38bdf8&point=ffffff\" width=\"95%\" alt=\"Activity Graph\" />\n</div>\n\n---\n\n<div align=\"center\">\n  <sub>⭐️ Чистый код, адаптивная вёрстка и умные ИИ-решения • Спасибо за визит!</sub>\n</div>\n",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      }
+    ]
+  },
+  {
+    "name": "watches",
+    "url": "https://github.com/inogomovfozil01-sys/watches",
+    "homepage": "https://watches-fozilpro.vercel.app",
+    "description": "Interactive modern watch store showcase built with vanilla JavaScript (ES6+), CSS3, and HTML5",
+    "pushedAt": "2026-09-15T10:11:25Z",
+    "createdAt": "2026-09-15T09:59:03Z",
+    "topics": [
+      "css3",
+      "frontend",
+      "html5",
+      "javascript",
+      "responsive-design"
+    ],
+    "languages": {
+      "CSS": 56241,
+      "JavaScript": 49248,
+      "HTML": 36832
+    },
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": null,
+    "tree": [
+      {
+        "name": "assets",
+        "type": "dir",
+        "path": "assets"
+      },
+      {
+        "name": "css",
+        "type": "dir",
+        "path": "css"
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "path": "index.html"
+      },
+      {
+        "name": "js",
+        "type": "dir",
+        "path": "js"
+      },
+      {
+        "name": "test_store.js",
+        "type": "file",
+        "path": "test_store.js"
+      },
+      {
+        "name": "test_validator.js",
+        "type": "file",
+        "path": "test_validator.js"
+      }
+    ]
+  },
+  {
+    "name": "uzbjobs",
+    "url": "https://github.com/inogomovfozil01-sys/uzbjobs",
+    "homepage": "https://uzbjobs.vercel.app",
+    "description": "Modern full-stack job platform built with Next.js 15, React 19, TypeScript, Tailwind CSS, Prisma, and Gemini AI",
+    "pushedAt": "2026-09-14T18:17:48Z",
+    "createdAt": "2026-09-13T15:17:58Z",
+    "topics": [
+      "gemini-api",
+      "nextjs",
+      "prisma",
+      "react",
+      "tailwindcss",
+      "typescript",
+      "vitest"
+    ],
+    "languages": {
+      "TypeScript": 611111,
+      "JavaScript": 4478,
+      "CSS": 2943
+    },
+    "packageJson": {
+      "name": "uzbjobs",
+      "dependencies": [
+        "@google/genai",
+        "@prisma/client",
+        "bcryptjs",
+        "cheerio",
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "next",
+        "next-auth",
+        "nodemailer",
+        "react",
+        "react-dom",
+        "tailwind-merge",
+        "zod"
+      ],
+      "devDependencies": [
+        "@types/bcryptjs",
+        "@types/node",
+        "@types/nodemailer",
+        "@types/react",
+        "@types/react-dom",
+        "autoprefixer",
+        "postcss",
+        "prisma",
+        "tailwindcss",
+        "tsx",
+        "typescript",
+        "vitest"
+      ]
+    },
+    "requirementsTxt": null,
+    "readme": "# UzbJobs — AI-платформа поиска работы в Узбекистане 🇺🇿\n\n**UzbJobs** — production-ready платформа агрегации вакансий и интеллектуального поиска работы для соискателей в Узбекистане.\n\nСистема автоматически обнаруживает вакансии через Google Search API, обрабатывает страницы с помощью Google Gemini API, проводит многоуровневую дедупликацию, проверяет актуальность, рассчитывает AI Match совместимость с профилем соискателя и генерирует сопроводительные письма на узбекском, русском и английском языках.\n\n---\n\n## 🚀 Возможности платформы\n\n### Для соискателей\n- **Интеллектуальный поиск**: фильтрация по городам (Ташкент, Самарканд, Бухара и др.), уровню зарплаты, формату (Remote / офис), требуемому опыту и сферам.\n- **AI Match (Совместимость 0-100%)**: моментальный расчет совпадения стека навыков и опыта с требованиями вакансии.\n- **AI Cover Letter Generator**: создание персонализированного сопроводительного письма на узбекском (`O'zbekcha`), русском или английском языках с учетом деталей вакансии.\n- **Закладки и профиль**: сохранение интересных вакансий и управление навыками.\n- **Мобильная версия**: адаптивный интерфейс с нижней панелью навигации (Home, Search, Saved, Profile).\n\n### Для работодателей и модераторов (Admin Panel)\n- **AI Scanner**: автономный сбор вакансий из сети по расписанию или вручную, с выводом логов в терминал в реальном времени.\n- **Многоуровневая дедупликация**: проверка нормализованных URL, хешей описания (SHA-256) и сходства названий/компаний.\n- **Очередь ручной модерации (Pending Review)**: просмотр AI Quality Score, подтверждение или отклонение публикаций в 1 клик.\n- **Управление поисковыми запросами**: настройка ключевых слов и приоритетов Google Search прямо из админки.\n- **Диагностика интеграций (`/admin/settings/integrations`)**: кнопки «Test connection» для проверки Gemini, Google Search, PostgreSQL, Email, Auth и Cron с замером задержки (latency).\n- **Система жалоб**: автоматический перевод вакансий в статус `PENDING_REVIEW` при накоплении жалоб.\n\n### Безопасность\n- **Защита от SSRF**: строгая проверка DNS и блокировка приватных подсетей (RFC 1918: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, loopback 127.0.0.1, AWS/GCP metadata `169.254.169.254`).\n- **Защита от Prompt Injection**: изоляция спарсенного веб-контента в специальных тегах с системными инструкциями игнорирования любых команд из внешних страниц.\n- **Rate Limiting**: защита от перегрузки для гостей, пользователей и админ-эндпоинтов.\n- **Защита секретов**: API-ключи никогда не попадают в клиентский бандл.\n\n---\n\n## 🛠 Технологический стек\n\n- **Frontend**: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, Lucide Icons\n- **Backend**: Next.js Server Actions & API Routes, Zod Validation\n- **Database**: PostgreSQL + Prisma ORM\n- **AI**: Google Gemini API (официальный SDK `@google/genai`)\n- **Search**: Google Custom Search JSON API\n- **Auth**: NextAuth.js (Credentials + Google OAuth)\n- **Email**: Nodemailer (SMTP)\n- **Тесты**: Vitest\n\n---\n\n## 📦 Быстрый старт и установка\n\n### 1. Клонирование и установка зависимостей\n\n```bash\ngit clone <repository-url>\ncd uzbjobs\nnpm install --legacy-peer-deps\n```\n\n### 2. Настройка переменных окружения\n\nСкопируйте пример файла конфигурации:\n\n```bash\ncp .env.example .env\n```\n\nЗаполните переменные в `.env`:\n\n```env\n# База данных PostgreSQL (Neon, Supabase, Railway или локальный)\nDATABASE_URL=\"postgresql://postgres:password@localhost:5432/uzbjobs?schema=public\"\n\n# Google Gemini API\nGEMINI_API_KEY=\"AIzaSy...\"\nGEMINI_MODEL=\"gemini-2.5-flash\"\n\n# Google Programmable Search Engine\nGOOGLE_SEARCH_API_KEY=\"AIzaSy...\"\nGOOGLE_SEARCH_ENGINE_ID=\"0123456789abcdef0\"\n\n# Аутентификация\nAUTH_SECRET=\"super-secret-random-32-character-key\"\nNEXTAUTH_URL=\"http://localhost:3000\"\n\n# Защита фонового запуска\nCRON_SECRET=\"your-secure-cron-secret-token\"\n```\n\n### 3. Инициализация базы данных и сид\n\n```bash\n# Генерация Prisma клиента\nnpx prisma generate\n\n# Применение миграций / синхронизация схемы\nnpx prisma db push\n\n# Наполнение тестовыми вакансиями и учетной записью администратора\nnpm run prisma:seed\n```\n\nДанные администратора по умолчанию после сида:\n- **Email**: `admin@uzbjobs.uz`\n- **Пароль**: `admin123456`\n\n### 4. Запуск в режиме разработки\n\n```bash\nnpm run dev\n```\n\nОткройте в браузере: [http://localhost:3000](http://localhost:3000)\n\n---\n\n## 🔑 Инструкция по получению API ключей\n\n### 1. Google Gemini API Key\n1. Перейдите на [Google AI Studio](https://aistudio.google.com/app/apikey).\n2. Нажмите **Create API key**.\n3. Скопируйте полученный ключ в `GEMINI_API_KEY` в вашем `.env`.\n\n### 2. Google Search API (Custom Search JSON API)\n1. Откройте [Google Cloud Console](https://console.cloud.google.com/apis/library/customsearch.googleapis.com) и включите **Custom Search API**.\n2. В разделе **Credentials** создайте API Key и укажите его в `GOOGLE_SEARCH_API_KEY`.\n3. Перейдите в [Programmable Search Engine](https://programmablesearchengine.google.com/).\n4. Нажмите **Add** и укажите поиск по всему интернету (\"Search the entire web\").\n5. Скопируйте **Search engine ID (CX)** в `GOOGLE_SEARCH_ENGINE_ID`.\n\n### 3. PostgreSQL Database\n- **Neon (Рекомендуется для serverless)**: Создайте бесплатный проект на [neon.tech](https://neon.tech) и скопируйте `DATABASE_URL` (с параметром `?sslmode=require`).\n- **Supabase**: Создайте проект на [supabase.com](https://supabase.com) и скопируйте строку подключения PostgreSQL.\n- **Railway**: Добавьте плагин PostgreSQL в [railway.app](https://railway.app).\n\n### 4. Настройка Google OAuth 2.0 (Вход через Google)\nДля включения входа и регистрации через Google:\n\n1. Перейдите в [Google Cloud Console -> Credentials](https://console.cloud.google.com/apis/credentials).\n2. Нажмите **Create Credentials** -> **OAuth client ID**.\n3. Если окно запроса согласия (OAuth consent screen) еще не настроено, выберите тип **External**, укажите название приложения (*UzbJobs*) и ваш контактный email.\n4. Выберите тип приложения: **Web application** (Веб-приложение).\n5. Укажите **Authorized JavaScript origins** (Разрешенные источники JavaScript):\n   - Для разработки: `http://localhost:3000`\n   - Для продакшна: `https://uzbjobs.vercel.app`\n6. Укажите **Authorized redirect URIs** (Разрешенные URI перенаправления):\n   - Для разработки: `http://localhost:3000/api/auth/callback/google`\n   - Для продакшна: `https://uzbjobs.vercel.app/api/auth/callback/google`\n7. Нажмите **Create**.\n8. Скопируйте **Client ID** и **Client Secret** в ваш `.env` (и в Environment Variables на панели Vercel):\n   ```env\n   GOOGLE_CLIENT_ID=\"ваш-client-id.apps.googleusercontent.com\"\n   GOOGLE_CLIENT_SECRET=\"ваш-client-secret\"\n   AUTH_SECRET=\"произвольная-случайная-строка-из-32-символов\"\n   ```\n9. Проверьте статус подключения на странице администратора: `/admin/settings/integrations`.\n\n---\n\n## ⚙️ Фоновые задачи (Cron)\n\nСканер вакансий и проверка устаревших объявлений могут запускаться автоматически через внешний планировщик (например, Vercel Cron, GitHub Actions или cron на сервере):\n\n```bash\ncurl -X POST https://your-domain.uz/api/cron/scan \\\n  -H \"Authorization: Bearer your-secure-cron-secret-token\"\n```\n\n---\n\n## 🧪 Запуск тестов\n\nПроект оснащен набором автоматических тестов для проверки безопасности, SSRF, дедупликации, AI Zod валидатора и rate limiting:\n\n```bash\nnpm test\n```\n\n---\n\n## 🚢 Production Deployment\n\n### Развертывание на Vercel\n1. Загрузите код в GitHub/GitLab репозиторий.\n2. Подключите репозиторий в [Vercel](https://vercel.com).\n3. В настройках проекта (**Settings -> Environment Variables**) добавьте все переменные из `.env.example`.\n4. Нажмите **Deploy**.\n\n---\n\n## 🩺 Диагностика (Health Check)\n\nЭндпоинт `/api/health` доступен для систем мониторинга:\n```json\n{\n  \"status\": \"ok\",\n  \"database\": \"connected\",\n  \"gemini\": \"connected\",\n  \"googleSearch\": \"connected\",\n  \"auth\": \"configured\"\n}\n```\n*Секретные ключи не раскрываются.*\n",
+    "tree": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "path": ".env.example"
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "path": ".gitignore"
+      },
+      {
+        "name": ".npmrc",
+        "type": "file",
+        "path": ".npmrc"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "next.config.ts",
+        "type": "file",
+        "path": "next.config.ts"
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "path": "package-lock.json"
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "path": "package.json"
+      },
+      {
+        "name": "postcss.config.mjs",
+        "type": "file",
+        "path": "postcss.config.mjs"
+      },
+      {
+        "name": "prisma",
+        "type": "dir",
+        "path": "prisma"
+      },
+      {
+        "name": "public",
+        "type": "dir",
+        "path": "public"
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "path": "scripts"
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "path": "src"
+      },
+      {
+        "name": "tailwind.config.ts",
+        "type": "file",
+        "path": "tailwind.config.ts"
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "path": "tests"
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "path": "tsconfig.json"
+      },
+      {
+        "name": "vitest.config.mjs",
+        "type": "file",
+        "path": "vitest.config.mjs"
+      }
+    ]
+  },
+  {
+    "name": "Bot-for-my-group",
+    "url": "https://github.com/inogomovfozil01-sys/Bot-for-my-group",
+    "homepage": "",
+    "description": "Telegram automation bot built with Python for community and group workflow management",
+    "pushedAt": "2026-05-16T15:39:58Z",
+    "createdAt": "2026-01-26T16:24:54Z",
+    "topics": [
+      "automation",
+      "python",
+      "telegram-bot"
+    ],
+    "languages": {
+      "Python": 1248
+    },
+    "packageJson": null,
+    "requirementsTxt": "aiofiles==25.1.0\naiogram==3.24.0\naiohappyeyeballs==2.6.1\naiohttp==3.13.2\naiosignal==1.4.0\nannotated-types==0.7.0\nanyio==4.12.1\nasyncpg==0.31.0\nattrs==25.4.0\nbackports.tarfile==1.2.0\nbuild==1.4.0\nCacheControl==0.14.4\ncertifi==2025.11.12\ncharset-normalizer==3.4.4\ncleo==2.1.0\ncolorama==0.4.6\ncrashtest==0.4.1\ndistlib==0.4.0\ndulwich==1.0.0\nfastjsonschema==2.21.2\nfilelock==3.20.3\nfindpython==0.7.1\nfrozenlist==1.8.0\ngreenlet==3.3.1\nh11==0.16.0\nhttpcore==1.0.9\nhttpx==0.28.1\nidna==3.11\nimportlib_metadata==8.7.1\ninstaller==0.7.0\njaraco.classes==3.4.0\njaraco.context==6.1.0\njaraco.functools==4.4.0\nkeyring==25.7.0\nmagic-filter==1.0.12\nmore-itertools==10.8.0\nmsgpack==1.1.2\nmultidict==6.7.0\npackaging==26.0\npbs-installer==2026.1.27\npkginfo==1.12.1.2\nplatformdirs==4.5.1\npoetry==2.3.2\npoetry-core==2.3.1\npropcache==0.4.1\npydantic==2.12.5\npydantic_core==2.41.5\npyproject_hooks==1.2.0\npython-dotenv==1.2.2\npywin32-ctypes==0.2.3\nRapidFuzz==3.14.3\nrequests==2.32.5\nrequests-toolbelt==1.0.0\nshellingham==1.5.4\nSQLAlchemy==2.0.46\ntomlkit==0.14.0\ntrove-classifiers==2026.1.14.14\ntyping-inspection==0.4.2\ntyping_extensions==4.15.0\nurllib3==2.6.3\nvirtualenv==20.36.1\nyarl==1.22.0\nyt-dlp==2025.12.8\nzipp==3.23.0\nzstandard==0.25.0\n",
+    "readme": "# Bot-for-my-group",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "main.py",
+        "type": "file",
+        "path": "main.py"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      }
+    ]
+  },
+  {
+    "name": "Zvezd",
+    "url": "https://github.com/inogomovfozil01-sys/Zvezd",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-04-01T12:05:56Z",
+    "createdAt": "2026-03-29T14:41:13Z",
+    "topics": [],
+    "languages": {
+      "JavaScript": 25865
+    },
+    "packageJson": {
+      "name": "giveaway-bot",
+      "dependencies": [
+        "dotenv",
+        "node-telegram-bot-api",
+        "pg"
+      ],
+      "devDependencies": []
+    },
+    "requirementsTxt": null,
+    "readme": "# Giveaway Bot\n\nTelegram-бот для розыгрышей с одним администратором:\n\n- админ создает розыгрыш через `/start`\n- бот публикует анонс в канал\n- участники заходят в бота и нажимают кнопку участия\n- после набора 10 участников админ запускает голосование\n- после закрытия опроса бот определяет победителя и уведомляет админа\n\n## Запуск\n\n1. Установите зависимости:\n\n```powershell\nnpm install\n```\n\n2. Создайте `.env` на основе `.env.example`\n\n3. Запустите бота:\n\n```powershell\nnpm start\n```\n\n## Переменные окружения\n\n- `BOT_TOKEN` - токен Telegram-бота\n- `ADMIN_ID` - Telegram ID администратора\n- `CHANNEL_ID` - username канала или ID вида `-100...`\n- `BOT_USERNAME` - username бота, например `@my_bot`\n- `VOTE_URL` - ссылка, которую бот вставляет в сообщение про голосование\n\n## Важно\n\n- Бот использует long polling.\n- Состояние розыгрыша сохраняется в `data/state.json`.\n- Голосование завершается, когда сам опрос закрыт в Telegram. После закрытия бот определяет победителя по числу голосов.\n",
+    "tree": [
+      {
+        "name": ".env",
+        "type": "file",
+        "path": ".env"
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "path": ".gitignore"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "index.js",
+        "type": "file",
+        "path": "index.js"
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "path": "package.json"
+      }
+    ]
+  },
+  {
+    "name": "buyursin-bot",
+    "url": "https://github.com/inogomovfozil01-sys/buyursin-bot",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-02-26T09:27:24Z",
+    "createdAt": "2026-02-02T08:30:48Z",
+    "topics": [],
+    "languages": {
+      "Python": 50372,
+      "Mako": 704,
+      "Makefile": 454,
+      "Dockerfile": 232
+    },
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": null,
+    "tree": [
+      {
+        "name": ".env",
+        "type": "file",
+        "path": ".env"
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "path": ".gitignore"
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "path": "Dockerfile"
+      },
+      {
+        "name": "Makefile",
+        "type": "file",
+        "path": "Makefile"
+      },
+      {
+        "name": "aiobot",
+        "type": "dir",
+        "path": "aiobot"
+      },
+      {
+        "name": "config.py",
+        "type": "file",
+        "path": "config.py"
+      },
+      {
+        "name": "db.sqlite",
+        "type": "file",
+        "path": "db.sqlite"
+      },
+      {
+        "name": "dispatcher",
+        "type": "dir",
+        "path": "dispatcher"
+      },
+      {
+        "name": "docker-compose.dev.yml",
+        "type": "file",
+        "path": "docker-compose.dev.yml"
+      },
+      {
+        "name": "docker-compose.prod.yml",
+        "type": "file",
+        "path": "docker-compose.prod.yml"
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "path": "docker-compose.yml"
+      },
+      {
+        "name": "main.py",
+        "type": "file",
+        "path": "main.py"
+      },
+      {
+        "name": "migrations",
+        "type": "dir",
+        "path": "migrations"
+      },
+      {
+        "name": "poetry.lock",
+        "type": "file",
+        "path": "poetry.lock"
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "path": "pyproject.toml"
+      }
+    ]
+  },
+  {
+    "name": "BIg-site",
+    "url": "https://github.com/inogomovfozil01-sys/BIg-site",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-02-10T10:27:01Z",
+    "createdAt": "2026-02-10T10:25:54Z",
+    "topics": [],
+    "languages": {},
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": "# BIg-sit\n",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      }
+    ]
+  },
+  {
+    "name": "DZ-STYLE-B",
+    "url": "https://github.com/inogomovfozil01-sys/DZ-STYLE-B",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-02-02T09:14:54Z",
+    "createdAt": "2026-02-02T09:11:18Z",
+    "topics": [],
+    "languages": {},
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": "# DZ-STYLE-B",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "src",
+        "type": "file",
+        "path": "src"
+      }
+    ]
+  },
+  {
+    "name": "Save_video_bro",
+    "url": "https://github.com/inogomovfozil01-sys/Save_video_bro",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-25T11:03:35Z",
+    "createdAt": "2026-01-22T06:25:05Z",
+    "topics": [],
+    "languages": {
+      "Python": 7549
+    },
+    "packageJson": null,
+    "requirementsTxt": "﻿python-telegram-bot==20.7\r\nyt-dlp\r\nhttpx\r\n",
+    "readme": "# Save_video_bro",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "config.json",
+        "type": "file",
+        "path": "config.json"
+      },
+      {
+        "name": "cookies.txt",
+        "type": "file",
+        "path": "cookies.txt"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      },
+      {
+        "name": "users.json",
+        "type": "file",
+        "path": "users.json"
+      }
+    ]
+  },
+  {
+    "name": "IQRO-ACADEMY",
+    "url": "https://github.com/inogomovfozil01-sys/IQRO-ACADEMY",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-24T12:12:17Z",
+    "createdAt": "2026-01-23T10:10:29Z",
+    "topics": [],
+    "languages": {
+      "Python": 13786
+    },
+    "packageJson": null,
+    "requirementsTxt": "aiofiles==25.1.0\r\naiogram==3.24.0\r\naiohappyeyeballs==2.6.1\r\naiohttp==3.13.3\r\naiosignal==1.4.0\r\nannotated-types==0.7.0\r\nattrs==25.4.0\r\ncertifi==2026.1.4\r\nfrozenlist==1.8.0\r\nidna==3.11\r\nmagic-filter==1.0.12\r\nmultidict==6.7.0\r\npropcache==0.4.1\r\npydantic==2.12.5\r\npydantic_core==2.41.5\r\npython-dotenv==1.2.1\r\npytz==2025.2\r\ntyping-inspection==0.4.2\r\ntyping_extensions==4.15.0\r\nyarl==1.22.0\r\n",
+    "readme": "# IQRO-ACADEMY",
+    "tree": [
+      {
+        "name": ".env",
+        "type": "file",
+        "path": ".env"
+      },
+      {
+        "name": "GBG.jpg",
+        "type": "file",
+        "path": "GBG.jpg"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "database.db",
+        "type": "file",
+        "path": "database.db"
+      },
+      {
+        "name": "info.json",
+        "type": "file",
+        "path": "info.json"
+      },
+      {
+        "name": "logo.jpg",
+        "type": "file",
+        "path": "logo.jpg"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      }
+    ]
+  },
+  {
+    "name": "News",
+    "url": "https://github.com/inogomovfozil01-sys/News",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-23T08:13:19Z",
+    "createdAt": "2026-01-22T06:30:57Z",
+    "topics": [],
+    "languages": {
+      "Python": 8561
+    },
+    "packageJson": null,
+    "requirementsTxt": "aiofiles==25.1.0\r\naiogram==3.24.0\r\naiohappyeyeballs==2.6.1\r\naiohttp==3.13.3\r\naiosignal==1.4.0\r\nannotated-types==0.7.0\r\nattrs==25.4.0\r\ncertifi==2026.1.4\r\nfrozenlist==1.8.0\r\nidna==3.11\r\nmagic-filter==1.0.12\r\nmultidict==6.7.0\r\npropcache==0.4.1\r\npydantic==2.12.5\r\npydantic_core==2.41.5\r\ntyping-inspection==0.4.2\r\ntyping_extensions==4.15.0\r\nyarl==1.22.0\r\npytz==2025.1\r\n",
+    "readme": "# News",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "photo_2025-12-13_16-31-07.jpg",
+        "type": "file",
+        "path": "photo_2025-12-13_16-31-07.jpg"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      },
+      {
+        "name": "users.db",
+        "type": "file",
+        "path": "users.db"
+      }
+    ]
+  },
+  {
+    "name": "Quiz_bot",
+    "url": "https://github.com/inogomovfozil01-sys/Quiz_bot",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-22T06:20:25Z",
+    "createdAt": "2026-01-22T06:19:49Z",
+    "topics": [],
+    "languages": {
+      "Python": 5283
+    },
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": "# Quiz_bot",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "questions.json",
+        "type": "file",
+        "path": "questions.json"
+      },
+      {
+        "name": "used_questions.json",
+        "type": "file",
+        "path": "used_questions.json"
+      }
+    ]
+  },
+  {
+    "name": "Activ",
+    "url": "https://github.com/inogomovfozil01-sys/Activ",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-21T19:57:09Z",
+    "createdAt": "2026-01-21T18:35:18Z",
+    "topics": [],
+    "languages": {
+      "Python": 5542
+    },
+    "packageJson": null,
+    "requirementsTxt": "﻿aiofiles==25.1.0\r\naiogram==3.24.0\r\naiohappyeyeballs==2.6.1\r\naiohttp==3.13.2\r\naiosignal==1.4.0\r\nannotated-types==0.7.0\r\nattrs==25.4.0\r\ncertifi==2025.11.12\r\nfrozenlist==1.8.0\r\nidna==3.11\r\nmagic-filter==1.0.12\r\nmultidict==6.7.0\r\npropcache==0.4.1\r\npydantic==2.12.5\r\npydantic_core==2.41.5\r\ntyping-inspection==0.4.2\r\ntyping_extensions==4.15.0\r\nyarl==1.22.0\r\nyt-dlp==2025.12.8\r\n",
+    "readme": "# Activ",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "config.json",
+        "type": "file",
+        "path": "config.json"
+      },
+      {
+        "name": "data.json",
+        "type": "file",
+        "path": "data.json"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      }
+    ]
+  },
+  {
+    "name": "Avtopost",
+    "url": "https://github.com/inogomovfozil01-sys/Avtopost",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-21T18:56:22Z",
+    "createdAt": "2026-01-21T18:54:55Z",
+    "topics": [],
+    "languages": {
+      "Python": 5084
+    },
+    "packageJson": null,
+    "requirementsTxt": "﻿aiofiles==25.1.0\r\naiogram==3.24.0\r\naiohappyeyeballs==2.6.1\r\naiohttp==3.13.3\r\naiosignal==1.4.0\r\nannotated-types==0.7.0\r\nattrs==25.4.0\r\ncertifi==2026.1.4\r\nfrozenlist==1.8.0\r\nidna==3.11\r\nmagic-filter==1.0.12\r\nmultidict==6.7.0\r\npropcache==0.4.1\r\npydantic==2.12.5\r\npydantic_core==2.41.5\r\ntyping-inspection==0.4.2\r\ntyping_extensions==4.15.0\r\nyarl==1.22.0\r\n",
+    "readme": "# Avtopost",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "descriptions.json",
+        "type": "file",
+        "path": "descriptions.json"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      }
+    ]
+  },
+  {
+    "name": "Activ1",
+    "url": "https://github.com/inogomovfozil01-sys/Activ1",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-21T18:49:02Z",
+    "createdAt": "2026-01-21T18:43:59Z",
+    "topics": [],
+    "languages": {
+      "Python": 6316
+    },
+    "packageJson": null,
+    "requirementsTxt": "﻿aiofiles==25.1.0\r\naiogram==3.24.0\r\naiohappyeyeballs==2.6.1\r\naiohttp==3.13.2\r\naiosignal==1.4.0\r\nannotated-types==0.7.0\r\nattrs==25.4.0\r\ncertifi==2025.11.12\r\nfrozenlist==1.8.0\r\nidna==3.11\r\nmagic-filter==1.0.12\r\nmultidict==6.7.0\r\npropcache==0.4.1\r\npydantic==2.12.5\r\npydantic_core==2.41.5\r\ntyping-inspection==0.4.2\r\ntyping_extensions==4.15.0\r\nyarl==1.22.0\r\nyt-dlp==2025.12.8\r\n",
+    "readme": "# Activ1",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "config.json",
+        "type": "file",
+        "path": "config.json"
+      },
+      {
+        "name": "data.json",
+        "type": "file",
+        "path": "data.json"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      }
+    ]
+  },
+  {
+    "name": "Save-video2",
+    "url": "https://github.com/inogomovfozil01-sys/Save-video2",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-21T08:04:52Z",
+    "createdAt": "2026-01-21T07:29:53Z",
+    "topics": [],
+    "languages": {
+      "Python": 6447
+    },
+    "packageJson": null,
+    "requirementsTxt": "﻿python-telegram-bot==20.7\r\nyt-dlp\r\nhttpx\r\n",
+    "readme": "# Save-video2",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "config.json",
+        "type": "file",
+        "path": "config.json"
+      },
+      {
+        "name": "cookies.txt",
+        "type": "file",
+        "path": "cookies.txt"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      },
+      {
+        "name": "users.json",
+        "type": "file",
+        "path": "users.json"
+      }
+    ]
+  },
+  {
+    "name": "Save-video",
+    "url": "https://github.com/inogomovfozil01-sys/Save-video",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-21T07:28:04Z",
+    "createdAt": "2026-01-21T07:24:09Z",
+    "topics": [],
+    "languages": {},
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": "# Save-video",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      }
+    ]
+  },
+  {
+    "name": "Coins-bot",
+    "url": "https://github.com/inogomovfozil01-sys/Coins-bot",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-19T17:57:38Z",
+    "createdAt": "2026-01-19T16:36:34Z",
+    "topics": [],
+    "languages": {
+      "Python": 45202
+    },
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": "# Coins-bot",
+    "tree": [
+      {
+        "name": "Procfile.txt",
+        "type": "file",
+        "path": "Procfile.txt"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.db",
+        "type": "file",
+        "path": "bot.db"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "requiremnts.txt",
+        "type": "file",
+        "path": "requiremnts.txt"
+      },
+      {
+        "name": "runtime.txt",
+        "type": "file",
+        "path": "runtime.txt"
+      },
+      {
+        "name": "users.db",
+        "type": "file",
+        "path": "users.db"
+      }
+    ]
+  },
+  {
+    "name": "Coins-bot2",
+    "url": "https://github.com/inogomovfozil01-sys/Coins-bot2",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-19T16:53:10Z",
+    "createdAt": "2026-01-19T16:51:33Z",
+    "topics": [],
+    "languages": {},
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": "# Coins-bot2",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      }
+    ]
+  },
+  {
+    "name": "Coins-bot1",
+    "url": "https://github.com/inogomovfozil01-sys/Coins-bot1",
+    "homepage": "",
+    "description": "",
+    "pushedAt": "2026-01-19T16:49:37Z",
+    "createdAt": "2026-01-19T16:49:36Z",
+    "topics": [],
+    "languages": {},
+    "packageJson": null,
+    "requirementsTxt": null,
+    "readme": null,
+    "tree": []
+  },
+  {
+    "name": "telegram-bot",
+    "url": "https://github.com/inogomovfozil01-sys/telegram-bot",
+    "homepage": "",
+    "description": "Save Link!",
+    "pushedAt": "2025-10-08T16:13:04Z",
+    "createdAt": "2025-10-08T16:09:35Z",
+    "topics": [],
+    "languages": {
+      "Python": 7095
+    },
+    "packageJson": null,
+    "requirementsTxt": "﻿aiofiles==24.1.0\r\naiogram==3.22.0\r\naiohappyeyeballs==2.6.1\r\naiohttp==3.12.15\r\naiosignal==1.4.0\r\nannotated-types==0.7.0\r\nanyio==4.11.0\r\nAPScheduler==3.6.3\r\nattrs==25.4.0\r\ncachetools==4.2.2\r\ncertifi==2025.10.5\r\ncharset-normalizer==3.4.3\r\nffmpeg==1.4\r\nfrozenlist==1.8.0\r\nh11==0.16.0\r\nhttpcore==1.0.9\r\nhttpx==0.28.1\r\nidna==3.10\r\ninstaloader==4.14.2\r\nmagic-filter==1.0.12\r\nmultidict==6.7.0\r\npropcache==0.4.0\r\npyaes==1.6.1\r\npyasn1==0.6.1\r\npydantic==2.11.10\r\npydantic_core==2.33.2\r\npython-dotenv==1.1.1\r\npython-telegram-bot==21.7\r\npytz==2025.2\r\nrequests==2.32.5\r\nrsa==4.9.1\r\nsetuptools==80.9.0\r\nsix==1.17.0\r\nsniffio==1.3.1\r\nTelethon==1.41.2\r\ntornado==6.1\r\ntyping-inspection==0.4.2\r\ntyping_extensions==4.15.0\r\ntzdata==2025.2\r\ntzlocal==5.3.1\r\nurllib3==2.5.0\r\nyarl==1.22.0\r\nyt-dlp==2025.9.26\r\n",
+    "readme": "# telegram-bot\nSave Link!\n",
+    "tree": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "README.md"
+      },
+      {
+        "name": "bot.py",
+        "type": "file",
+        "path": "bot.py"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "requirements.txt"
+      }
+    ]
+  }
+]
