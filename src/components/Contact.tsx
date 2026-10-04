@@ -13,6 +13,7 @@ export function Contact() {
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '', honeypot: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
   const handleCopyEmail = () => {
@@ -21,7 +22,7 @@ export function Contact() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.honeypot) {
       // Spam detected
@@ -33,21 +34,55 @@ export function Contact() {
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setError(language === 'ru' ? 'Некорректный формат email' : 'Invalid email format');
+    const contactValid =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ||
+      /^@[A-Za-z0-9_]{3,32}$/.test(formData.email) ||
+      /^\+?[\d\s()\-]{7,30}$/.test(formData.email);
+
+    if (!contactValid) {
+      setError(
+        language === 'ru'
+          ? 'Укажите корректный email, @telegram или номер телефона'
+          : 'Please enter a valid email, @telegram, or phone number'
+      );
       return;
     }
 
     setError('');
-    setSubmitted(true);
+    setIsSubmitting(true);
 
-    // Trigger direct mail client opening with structured parameters
-    const subject = encodeURIComponent(`Project Inquiry from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '', honeypot: '' });
+      } else {
+        // Fallback to mailto if API fails
+        const subject = encodeURIComponent(`Project Inquiry from ${formData.name}`);
+        const body = encodeURIComponent(
+          `Name: ${formData.name}\nContact: ${formData.email}\n\nMessage:\n${formData.message}`
+        );
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        setSubmitted(true);
+      }
+    } catch {
+      // Offline or network error fallback
+      const subject = encodeURIComponent(`Project Inquiry from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nContact: ${formData.email}\n\nMessage:\n${formData.message}`
+      );
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -228,10 +263,20 @@ export function Contact() {
 
               <button
                 type="submit"
-                className="w-full py-3.5 px-6 rounded-xl bg-accent hover:bg-accent-hover text-white text-sm font-semibold tracking-wide shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all duration-200 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full py-3.5 px-6 rounded-xl bg-accent hover:bg-accent-hover disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-semibold tracking-wide shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all duration-200 flex items-center justify-center gap-2"
               >
-                <Send className="w-4 h-4" />
-                <span>{t.formSubmit[language]}</span>
+                {isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>{t.formSending[language]}</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>{t.formSubmit[language]}</span>
+                  </>
+                )}
               </button>
             </form>
           </div>
